@@ -1,10 +1,13 @@
 "use client";
 
 import { motion, AnimatePresence } from "motion/react";
-import { Search, Menu } from "lucide-react";
+import { Search } from "lucide-react";
 import React from "react";
+import MenuIcon from "@/assets/icons/MenuButton.svg";
+import Image from "next/image";
+import { Button } from "../ui/button";
 
-export default function Header() {
+const NavigationBar = () => {
   const languages = ["FB", "IN", "DR", "BE"];
 
   const [isMobile, setIsMobile] = React.useState(true);
@@ -12,7 +15,7 @@ export default function Header() {
   // Detect screen width (client-side)
   React.useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth < 640); // sm breakpoint
+      setIsMobile(window.innerWidth < 640);
     };
 
     handleResize(); // Set on mount
@@ -21,11 +24,11 @@ export default function Header() {
   }, []);
 
   return (
-    <motion.header
+    <motion.nav
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
-      className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between p-8"
+      className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between p-8 bg-black"
     >
       <AnimatePresence>
         {!isMobile && (
@@ -77,26 +80,22 @@ export default function Header() {
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4, ease: "easeOut", delay: 0.2 }}
-        className="flex items-center gap-6"
+        className="flex items-center gap-4"
       >
         <button className="text-gray-400 hover:text-white transition-colors">
           <Search size={20} />
         </button>
-        <button className="flex items-center gap-2 text-white uppercase text-sm tracking-wider">
-          <span>Menu</span>
-          <Menu size={20} />
-        </button>
-      </motion.div>
 
-      {/* <div className="flex items-center gap-6">
-        <button className="text-gray-400 hover:text-white transition-colors">
-          <Search size={20} />
-        </button>
-        <button className="flex items-center gap-2 text-white uppercase text-sm tracking-wider">
+        <Button
+          className="flex items-center bg-transparent text-white uppercase text-sm tracking-wider cursor-pointer hover:bg-transparent"
+          onClick={() => {}}
+        >
           <span>Menu</span>
-          <Menu size={20} />
-        </button>
-      </div> */}
-    </motion.header>
+          <Image src={MenuIcon} alt="Menu Icon" width={20} height={20} />
+        </Button>
+      </motion.div>
+    </motion.nav>
   );
-}
+};
+
+export default NavigationBar;

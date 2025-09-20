@@ -40,7 +40,7 @@ export default function HeroSection() {
         >
           <span className="text-white">Interface</span>
           <span className="text-gleamy-gray-600 text-orange-500">.</span>
-          <span className="text-gleamy-gray-500">Interactions</span>
+          <span className="text-gleamy-gray-500">Experience</span>
           {/* <span className="text-gleamy-gray-600 text-orange-500">.</span> */}
           {/* <span className="text-gleamy-gray-400">Experience</span>
           <span className="text-gleamy-gray-600">.</span> */}

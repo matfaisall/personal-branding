@@ -3,7 +3,7 @@
 import { motion } from "motion/react";
 
 import React from "react";
-import Header from "@/components/layout/Header";
+import NavigationBar from "@/components/layout/NavigationBar";
 import SideNav from "@/components/layout/SideNav";
 import MarqueeSection from "@/components/layout/Marquee";
 import HeroSection from "@/components/layout/HeroSection";
@@ -14,7 +14,7 @@ import { Play } from "lucide-react";
 const Homepage = () => {
   return (
     <div className="relative min-h-svh">
-      <Header />
+      <NavigationBar />
       <SideNav />
       <MarqueeSection />
       <HeroSection />

@@ -9,7 +9,7 @@ export default function RotatingCircleText() {
       initial={{ opacity: 0, scale: 0.8, rotate: -90 }}
       animate={{ opacity: 1, scale: 1, rotate: 0 }}
       transition={{ duration: 1, delay: 0.9 }}
-      className="absolute top-32 left-20 w-32 h-32 rounded-full border border-orange-500 md:flex items-center justify-center z-30 hidden"
+      className="absolute top-32 left-20 w-24 h-24 rounded-full border border-orange-500 md:flex items-center justify-center z-30 hidden"
     >
       {/* SVG Teks Melingkar */}
       <motion.svg
