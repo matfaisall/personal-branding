@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { motion, type Variants } from "motion/react";
+import { motion, type Variants } from 'motion/react';
 
-export default function HeroSection() {
+const HeroSection = () => {
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
@@ -21,22 +21,22 @@ export default function HeroSection() {
       y: 0,
       transition: {
         duration: 0.8,
-        ease: "easeOut",
+        ease: 'easeOut',
       },
     },
   };
 
   return (
-    <section className="relative min-h-dvh flex items-center justify-center px-8 md:px-16 lg:px-20 z-20">
+    <section className="relative z-20 flex min-h-dvh items-center justify-center px-8 md:px-16 lg:px-20">
       <motion.div
-        className="max-w-6xl w-full"
+        className="w-full max-w-6xl"
         variants={containerVariants}
         initial="hidden"
         animate="visible"
       >
         <motion.h1
           variants={itemVariants}
-          className="text-3xl md:text-6xl lg:text-7xl xl:text-7xl font-light leading-tight mb-8"
+          className="mb-8 text-3xl leading-tight font-light md:text-6xl lg:text-7xl xl:text-7xl"
         >
           <span className="text-white">Interface</span>
           <span className="text-gleamy-gray-600 text-orange-500">.</span>
@@ -48,7 +48,7 @@ export default function HeroSection() {
 
         <motion.h2
           variants={itemVariants}
-          className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-light"
+          className="text-4xl font-light md:text-5xl lg:text-6xl xl:text-7xl"
         >
           <span className="text-white">Hand-Coded Perfection</span>
           <span className="text-gleamy-gray-600 text-orange-500">.</span>
@@ -58,4 +58,6 @@ export default function HeroSection() {
       </motion.div>
     </section>
   );
-}
+};
+
+export default HeroSection;

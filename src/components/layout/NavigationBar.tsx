@@ -85,7 +85,6 @@ const NavigationBar = () => {
         <button className="text-gray-400 hover:text-white transition-colors">
           <Search size={20} />
         </button>
-
         <Button
           className="flex items-center bg-transparent text-white uppercase text-sm tracking-wider cursor-pointer hover:bg-transparent"
           onClick={() => {}}
