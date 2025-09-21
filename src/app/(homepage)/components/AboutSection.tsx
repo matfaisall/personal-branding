@@ -10,8 +10,8 @@ const AboutSection = () => {
       {/* title for section */}
       <TitleSection title="about us" />
 
-      <div className="grid grid-cols-5 p-0 lg:p-8">
-        <div className="col-span-12 md:col-span-2">
+      <div className="grid grid-cols-12 p-0 lg:p-8">
+        <div className="col-span-12 md:col-span-4">
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -27,7 +27,7 @@ const AboutSection = () => {
           </motion.div>
         </div>
 
-        <div className="col-span-12 md:col-span-3">
+        <div className="col-span-12 md:col-span-8">
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
