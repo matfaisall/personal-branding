@@ -2,6 +2,8 @@ import NavigationBar from '@/components/layout/NavigationBar';
 import SideNav from '@/components/layout/SideNav';
 import MarqueeSection from '@/components/layout/Marquee';
 import { HeroSection, AboutSection } from './(homepage)/components';
+import RotatingCircleText from '@/assets/icons/RotatingCircleText';
+import CTAPlayButton from '@/assets/icons/CTAPlayButton';
 
 // this is the main page
 export default function Home() {
@@ -13,11 +15,18 @@ export default function Home() {
         <SideNav />
         <MarqueeSection />
         <HeroSection />
+
+        {/* badges: top left corner */}
+        <RotatingCircleText />
+
+        {/* badges: bottom right corner */}
+        <CTAPlayButton />
       </div>
 
       {/* about section */}
-
-      <AboutSection />
+      <div className="min-h-[70svh]">
+        <AboutSection />
+      </div>
     </div>
   );
 }

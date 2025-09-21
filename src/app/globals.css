@@ -158,4 +158,31 @@
   .bg-gleamy-orange {
     @apply bg-amber-700 text-white cursor-pointer;
   }
+
+
+}
+
+/* for about section */
+
+.text-outline {
+  color: transparent;
+  -webkit-text-stroke: 1px white;
+  text-stroke: 1px white;
+  font-weight: 200;
+}
+
+/* Fallback untuk browser yang tidak support text-stroke */
+@supports not (-webkit-text-stroke: 1px white) {
+  .text-outline {
+    color: white;
+    text-shadow: 
+      -1px -1px 0 transparent,
+      1px -1px 0 transparent,
+      -1px 1px 0 transparent,
+      1px 1px 0 transparent,
+      -1px 0 0 transparent,
+      1px 0 0 transparent,
+      0 -1px 0 transparent,
+      0 1px 0 transparent;
+  }
 }
