@@ -4,50 +4,31 @@ import { motion } from 'motion/react';
 
 import TitleSection from '@/elements/title-section';
 import React from 'react';
-
-interface Service {
-  id: number;
-  title: string;
-  description: string;
-  hasAccent?: boolean;
-}
+import { services } from '@/constant/section/services';
 
 const ServiceSection = () => {
-  const services: Service[] = [
-    {
-      id: 1,
-      title: 'Brand Identity.',
-      description:
-        "Bringing The History Of Your Brand To The Forefront Gives An Emotional Dimension To Your Visual Identity, Which Is Essential Today More Than Ever In Today's Digital Landscape.",
-      hasAccent: true,
-    },
-    {
-      id: 2,
-      title: 'Technology.',
-      description:
-        "Bringing The History Of Your Brand To The Forefront Gives An Emotional Dimension To Your Visual Identity, Which Is Essential Today More Than Ever In Today's Digital Landscape.",
-    },
-    {
-      id: 3,
-      title: 'UX/UI Design.',
-      description:
-        "Bringing The History Of Your Brand To The Forefront Gives An Emotional Dimension To Your Visual Identity, Which Is Essential Today More Than Ever In Today's Digital Landscape.",
-    },
-    {
-      id: 4,
-      title: 'Web Development.',
-      description:
-        "Bringing The History Of Your Brand To The Forefront Gives An Emotional Dimension To Your Visual Identity, Which Is Essential Today More Than Ever In Today's Digital Landscape.",
-    },
-    {
-      id: 5,
-      title: 'Mobile Apps.',
-      description:
-        "Bringing The History Of Your Brand To The Forefront Gives An Emotional Dimension To Your Visual Identity, Which Is Essential Today More Than Ever In Today's Digital Landscape.",
-    },
-  ];
-
   const scrollContainerRef = React.useRef<HTMLDivElement>(null);
+
+  React.useEffect(() => {
+    const container = scrollContainerRef.current;
+
+    const handleWheel = (e: WheelEvent) => {
+      if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+        e.preventDefault();
+        container!.scrollLeft += e.deltaY;
+      }
+    };
+
+    if (container) {
+      container.addEventListener('wheel', handleWheel, { passive: false });
+    }
+
+    return () => {
+      if (container) {
+        container.removeEventListener('wheel', handleWheel);
+      }
+    };
+  }, []);
 
   const scrollLeft = () => {
     if (scrollContainerRef.current) {
@@ -120,15 +101,15 @@ const ServiceSection = () => {
               msOverflowStyle: 'none',
               overflowY: 'hidden',
             }}
-            onWheel={(e) => {
-              // Prevent vertical scrolling on wheel event
-              if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
-                e.preventDefault();
-                if (scrollContainerRef.current) {
-                  scrollContainerRef.current.scrollLeft += e.deltaY;
-                }
-              }
-            }}
+            // onWheel={(e) => {
+            //   // Prevent vertical scrolling on wheel event
+            //   if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+            //     e.preventDefault();
+            //     if (scrollContainerRef.current) {
+            //       scrollContainerRef.current.scrollLeft += e.deltaY;
+            //     }
+            //   }
+            // }}
           >
             {services.map((service, index) => (
               <motion.div
@@ -150,7 +131,7 @@ const ServiceSection = () => {
                 </p>
 
                 {/* Know More Link */}
-                <div className="relative inline-block">
+                {/* <div className="relative inline-block">
                   <motion.a
                     href="#"
                     className="group relative inline-block text-base font-light tracking-wide text-white transition-colors duration-300 hover:text-orange-500 lg:text-lg"
@@ -160,20 +141,7 @@ const ServiceSection = () => {
                     Know More
                     <span className="absolute bottom-0 left-0 h-[1px] w-0 bg-orange-500 transition-all duration-300 group-hover:w-full"></span>
                   </motion.a>
-
-                  {/* Orange Arrow Accent for first service */}
-                  {service.hasAccent && (
-                    <motion.div
-                      initial={{ opacity: 0, scale: 0 }}
-                      whileInView={{ opacity: 1, scale: 1 }}
-                      transition={{ duration: 0.5, delay: 1 }}
-                      viewport={{ once: true }}
-                      className="absolute top-1/2 -right-8 -translate-y-1/2 transform"
-                    >
-                      <div className="h-1.5 w-6 rotate-12 transform bg-orange-500"></div>
-                    </motion.div>
-                  )}
-                </div>
+                </div> */}
               </motion.div>
             ))}
           </div>
