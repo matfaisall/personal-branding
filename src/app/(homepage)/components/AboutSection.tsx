@@ -36,11 +36,11 @@ const AboutSection = () => {
             className="space-y-8"
           >
             <div className="flex flex-col items-start gap-8">
-              <h1 className="text-4xl font-semibold">We are a digital production team.</h1>
+              <h1 className="text-4xl font-semibold">I create web experiences that matter.</h1>
               <div className="relative">
                 <p className="max-w-3xl text-lg leading-relaxed font-light tracking-wide text-gray-100 lg:text-xl">
-                  GLEAMY IS A LEADING DESIGN & SOFTWARE DEVELOPMENT AGENCY BASED IN BERLIN. WE HELP
-                  STARTUPS & FORTUNE 500 COMPANIES DELIGHT HUMANS ON THE OTHER SIDE OF THE SCREEN.
+                  Frontend developer with a passion for clean code and beautiful interfaces. I build
+                  web applications that not only look great but also perform exceptionally.
                 </p>
               </div>
               <motion.div

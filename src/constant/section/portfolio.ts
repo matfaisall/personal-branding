@@ -1,0 +1,50 @@
+import { PortfolioItem } from '@/types/mainpage/section/portfolio';
+
+export const portfolioItems: PortfolioItem[] = [
+  {
+    id: 'gleamy-portfolio',
+    title: 'Gleamy Portfolio',
+    category: 'UI/UX',
+    image: '/images/image1.jpg',
+    description: 'Modern agency portfolio with dark theme and smooth animations',
+    technologies: ['Figma', 'Adobe XD', 'Prototyping'],
+    link: 'https://gleamy.com',
+    featured: true,
+  },
+  {
+    id: 'nfts-dashboard',
+    title: 'NFTs Dashboard',
+    category: 'UI/UX',
+    image: '/images/image2.jpg',
+    description: 'Comprehensive dashboard for NFT marketplace with advanced analytics',
+    technologies: ['React', 'Next.js', 'TypeScript', 'Tailwind'],
+    link: 'https://nfts-dashboard.com',
+    github: 'https://github.com/username/nfts-dashboard',
+    featured: true,
+  },
+  {
+    id: 'ecommerce-platform',
+    title: 'E-commerce Platform',
+    category: 'FRONTEND',
+    image: '/images/image3.jpg',
+    description: 'Full-featured e-commerce platform with modern UI/UX',
+    technologies: ['React', 'Next.js', 'TypeScript', 'Stripe'],
+    github: 'https://github.com/username/ecommerce',
+  },
+  {
+    id: 'banking-dashboard',
+    title: 'Banking Dashboard',
+    category: 'UI/UX',
+    image: '/images/image4.jpg',
+    description: 'Clean and secure banking dashboard with data visualization',
+    technologies: ['Figma', 'Chart.js', 'React', 'TypeScript'],
+  },
+  {
+    id: 'travel-app',
+    title: 'Travel App',
+    category: 'FRONTEND',
+    image: '/images/image5.jpg',
+    description: 'Mobile-first travel app with booking functionality ...',
+    technologies: ['React Native', 'TypeScript', 'React Query'],
+  },
+];
