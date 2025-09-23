@@ -1,14 +1,12 @@
-"use client";
+'use client';
 
-import { motion, AnimatePresence } from "motion/react";
-import { Search } from "lucide-react";
-import React from "react";
-import MenuIcon from "@/assets/icons/MenuButton.svg";
-import Image from "next/image";
-import { Button } from "../ui/button";
+import { motion, AnimatePresence } from 'motion/react';
+import React from 'react';
+import MenuIcon from '@/assets/icons/MenuButton.svg';
+import Image from 'next/image';
 
 const NavigationBar = () => {
-  const languages = ["FB", "IN", "DR", "BE"];
+  const languages = ['FB', 'IN', 'DR', 'BE'];
 
   const [isMobile, setIsMobile] = React.useState(true);
 
@@ -19,8 +17,8 @@ const NavigationBar = () => {
     };
 
     handleResize(); // Set on mount
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   return (
@@ -28,7 +26,7 @@ const NavigationBar = () => {
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
-      className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between p-8 bg-black"
+      className="fixed top-0 right-0 left-0 z-50 flex items-center justify-between bg-black p-8"
     >
       <AnimatePresence>
         {!isMobile && (
@@ -36,7 +34,7 @@ const NavigationBar = () => {
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.4, ease: "easeOut" }}
+            transition={{ duration: 0.4, ease: 'easeOut' }}
             className="flex items-center gap-8"
           >
             <div className="flex gap-4 text-sm text-gray-500">
@@ -53,9 +51,9 @@ const NavigationBar = () => {
                     </motion.span>
                   )}
                   <motion.span
-                    whileHover={{ color: "#ffffff" }}
+                    whileHover={{ color: '#ffffff' }}
                     transition={{ duration: 0.2 }}
-                    className="transition-colors cursor-pointer"
+                    className="cursor-pointer transition-colors"
                   >
                     {lang}
                   </motion.span>
@@ -67,31 +65,31 @@ const NavigationBar = () => {
       </AnimatePresence>
 
       <motion.div
-        key={isMobile ? "logo-mobile" : "logo-desktop"}
+        key={isMobile ? 'logo-mobile' : 'logo-desktop'}
         initial={{ opacity: 0, x: isMobile ? -30 : 0, y: isMobile ? 0 : -10 }}
         animate={{ opacity: 1, x: 0, y: 0 }}
-        transition={{ duration: 0.5, ease: "easeOut" }}
-        className="text-3xl font-light text-white tracking-wider sm:absolute sm:left-1/2 sm:-translate-x-1/2"
+        transition={{ duration: 0.5, ease: 'easeOut' }}
+        className="text-xl font-light tracking-wider text-white sm:absolute sm:left-1/2 sm:-translate-x-1/2 md:text-3xl"
       >
-        matfaisall
+        faisall
       </motion.div>
 
       <motion.div
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.4, ease: "easeOut", delay: 0.2 }}
-        className="flex items-center gap-4"
+        transition={{ duration: 0.4, ease: 'easeOut', delay: 0.2 }}
+        // className="flex items-center gap-4"
       >
-        <button className="text-gray-400 hover:text-white transition-colors">
+        {/* <button className="text-gray-400 transition-colors hover:text-white">
           <Search size={20} />
-        </button>
-        <Button
-          className="flex items-center bg-transparent text-white uppercase text-sm tracking-wider cursor-pointer hover:bg-transparent"
+        </button> */}
+        <button
+          className="flex cursor-pointer items-center bg-transparent text-sm tracking-wider text-white uppercase hover:bg-transparent"
           onClick={() => {}}
         >
           <span>Menu</span>
           <Image src={MenuIcon} alt="Menu Icon" width={20} height={20} />
-        </Button>
+        </button>
       </motion.div>
     </motion.nav>
   );
