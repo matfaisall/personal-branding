@@ -4,11 +4,13 @@ import { motion, AnimatePresence } from 'motion/react';
 import React from 'react';
 import MenuIcon from '@/assets/icons/MenuButton.svg';
 import Image from 'next/image';
+import MenuOverlay from './MenuOverlay';
 
 const NavigationBar = () => {
   const languages = ['FB', 'IN', 'DR', 'BE'];
 
   const [isMobile, setIsMobile] = React.useState(true);
+  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
   // Detect screen width (client-side)
   React.useEffect(() => {
@@ -21,77 +23,89 @@ const NavigationBar = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+  };
+
   return (
-    <motion.nav
-      initial={{ opacity: 0, y: -20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6 }}
-      className="fixed top-0 right-0 left-0 z-50 flex items-center justify-between bg-black p-8"
-    >
-      <AnimatePresence>
-        {!isMobile && (
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.4, ease: 'easeOut' }}
-            className="flex items-center gap-8"
-          >
-            <div className="flex gap-4 text-sm text-gray-500">
-              {languages.map((lang, i) => (
-                <span key={lang} className="flex items-center gap-2">
-                  {i > 0 && (
-                    <motion.span
-                      initial={{ scale: 0 }}
-                      animate={{ scale: 1 }}
-                      transition={{ duration: 0.2 }}
-                      className="text-orange-500"
-                    >
-                      •
-                    </motion.span>
-                  )}
-                  <motion.span
-                    whileHover={{ color: '#ffffff' }}
-                    transition={{ duration: 0.2 }}
-                    className="cursor-pointer transition-colors"
-                  >
-                    {lang}
-                  </motion.span>
-                </span>
-              ))}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      <motion.div
-        key={isMobile ? 'logo-mobile' : 'logo-desktop'}
-        initial={{ opacity: 0, x: isMobile ? -30 : 0, y: isMobile ? 0 : -10 }}
-        animate={{ opacity: 1, x: 0, y: 0 }}
-        transition={{ duration: 0.5, ease: 'easeOut' }}
-        className="text-xl font-light tracking-wider text-white sm:absolute sm:left-1/2 sm:-translate-x-1/2 md:text-3xl"
-      >
-        faisall
-      </motion.div>
-
-      <motion.div
-        initial={{ opacity: 0, y: -10 }}
+    <>
+      <motion.nav
+        initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.4, ease: 'easeOut', delay: 0.2 }}
-        // className="flex items-center gap-4"
+        transition={{ duration: 0.6 }}
+        className="fixed top-0 right-0 left-0 z-50 flex items-center justify-between bg-black p-6"
       >
-        {/* <button className="text-gray-400 transition-colors hover:text-white">
-          <Search size={20} />
-        </button> */}
-        <button
-          className="flex cursor-pointer items-center bg-transparent text-sm tracking-wider text-white uppercase hover:bg-transparent"
-          onClick={() => {}}
+        <AnimatePresence>
+          {!isMobile && (
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.4, ease: 'easeOut' }}
+              className="flex items-center gap-8"
+            >
+              <div className="flex gap-4 text-sm text-gray-500">
+                {languages.map((lang, i) => (
+                  <span key={lang} className="flex items-center gap-2">
+                    {i > 0 && (
+                      <motion.span
+                        initial={{ scale: 0 }}
+                        animate={{ scale: 1 }}
+                        transition={{ duration: 0.2 }}
+                        className="text-orange-500"
+                      >
+                        •
+                      </motion.span>
+                    )}
+                    <motion.span
+                      whileHover={{ color: '#ffffff' }}
+                      transition={{ duration: 0.2 }}
+                      className="cursor-pointer transition-colors"
+                    >
+                      {lang}
+                    </motion.span>
+                  </span>
+                ))}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        <motion.div
+          key={isMobile ? 'logo-mobile' : 'logo-desktop'}
+          initial={{ opacity: 0, x: isMobile ? -30 : 0, y: isMobile ? 0 : -10 }}
+          animate={{ opacity: 1, x: 0, y: 0 }}
+          transition={{ duration: 0.5, ease: 'easeOut' }}
+          className="text-xl font-light tracking-wider text-white md:text-3xl"
         >
-          <span>Menu</span>
-          <Image src={MenuIcon} alt="Menu Icon" width={20} height={20} />
-        </button>
-      </motion.div>
-    </motion.nav>
+          faisal
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4, ease: 'easeOut', delay: 0.2 }}
+          // className="flex items-center gap-4"
+          onClick={toggleMenu}
+        >
+          <AnimatePresence mode="wait">
+            <button
+              className="flex cursor-pointer items-center bg-transparent text-sm tracking-wider text-white uppercase hover:bg-transparent"
+              onClick={() => {}}
+            >
+              <span>Menu</span>
+              <Image src={MenuIcon} alt="Menu Icon" width={20} height={20} />
+            </button>
+          </AnimatePresence>
+        </motion.div>
+      </motion.nav>
+
+      <MenuOverlay isOpen={isMenuOpen} onClose={closeMenu} />
+    </>
   );
 };
 
