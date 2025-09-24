@@ -6,6 +6,7 @@ import {
   AboutSection,
   ServiceSection,
   PortfolioSection,
+  ContactUsSection,
 } from './(homepage)/components';
 import RotatingCircleText from '@/assets/icons/RotatingCircleText';
 import CTAPlayButton from '@/assets/icons/CTAPlayButton';
@@ -36,8 +37,14 @@ export default function Home() {
         <ServiceSection />
       </div>
 
-      <div className="min-h-svh">
+      {/* portfolio section */}
+      <div className="min-h-[70svh]">
         <PortfolioSection />
+      </div>
+
+      {/*  */}
+      <div className="min-h-[65svh]">
+        <ContactUsSection />
       </div>
     </div>
   );
