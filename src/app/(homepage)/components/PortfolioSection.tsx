@@ -60,14 +60,12 @@ const PortfolioSection = () => {
               </div>
             </div>
 
-            <motion.div
+            <div
               ref={scrollContainerRef}
               className="scrollbar-visible cursor-grab overflow-x-auto py-8 pb-2 active:cursor-grabbing"
-              drag="x"
-              dragConstraints={{ left: 0, right: 0 }}
-              whileDrag={{ cursor: 'grabbing' }}
               style={{
                 scrollSnapType: 'x mandatory',
+                WebkitOverflowScrolling: 'touch',
               }}
             >
               <div className="flex gap-6 pb-4" style={{ width: 'max-content' }}>
@@ -118,12 +116,10 @@ const PortfolioSection = () => {
                   return null;
                 })}
               </div>
-            </motion.div>
+            </div>
           </div>
         </div>
       </div>
-
-      {/* button view more project */}
 
       <div className="mt-6 flex justify-center">
         <motion.div
