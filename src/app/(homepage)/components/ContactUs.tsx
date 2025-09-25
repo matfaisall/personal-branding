@@ -3,6 +3,7 @@
 import { Button } from '@/components/ui/button';
 import React from 'react';
 import { AnimatePresence, motion, type Variants } from 'motion/react';
+import { Send, FileDown } from 'lucide-react';
 
 const ContactUsSection = () => {
   const socialLinks = ['LINKEDIN', 'GITHUB', 'INSTAGRAM', 'DRIBBBLE'];
@@ -286,22 +287,31 @@ const ContactUsSection = () => {
           </motion.p>
 
           {/* 🎯 BUTTONS */}
-          <motion.div variants={buttonsContainerVariants} className="flex justify-center gap-4">
+          <motion.div
+            variants={buttonsContainerVariants}
+            className="flex flex-wrap justify-center gap-4"
+          >
             <motion.div variants={buttonVariants} whileHover="hover" whileTap="tap">
               <Button
-                size="lg"
-                className="px-8 py-3 text-lg font-medium shadow-lg transition-all duration-300 hover:shadow-xl"
+                size="default"
+                className="text-md px-4 py-3 font-medium transition-all duration-300"
               >
-                Download CV
+                Download CV{' '}
+                <span>
+                  <FileDown strokeWidth={1.25} size={12} />
+                </span>
               </Button>
             </motion.div>
             <motion.div variants={buttonVariants} whileHover="hover" whileTap="tap">
               <Button
-                size="lg"
+                size="default"
                 variant="outline"
-                className="px-8 py-3 text-lg font-medium shadow-lg transition-all duration-300 hover:shadow-xl"
+                className="text-md px-4 py-3 font-medium transition-all duration-300"
               >
-                Get in Touch
+                Get in Touch{' '}
+                <span>
+                  <Send strokeWidth={1.25} size={12} />
+                </span>
               </Button>
             </motion.div>
           </motion.div>
@@ -325,14 +335,14 @@ const ContactUsSection = () => {
                 scale: 1.02,
                 boxShadow: '0 20px 40px rgba(0,0,0,0.1)',
               }}
-              className="rounded-xl bg-gray-900/90 px-6 py-4 backdrop-blur-md"
+              className="rounded-xl bg-black py-4 backdrop-blur-md"
             >
               <AnimatePresence mode="wait">
                 <motion.div
                   initial="hidden"
                   animate="visible"
                   exit="hidden"
-                  className="flex items-center gap-6"
+                  className="flex flex-wrap items-center justify-center gap-4"
                   variants={{
                     hidden: { opacity: 0 },
                     visible: {
