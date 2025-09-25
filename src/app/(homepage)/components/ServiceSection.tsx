@@ -5,6 +5,7 @@ import { motion } from 'motion/react';
 import TitleSection from '@/elements/title-section';
 import React from 'react';
 import { services } from '@/constant/section/services';
+import { ArrowRight } from 'lucide-react';
 
 const ServiceSection = () => {
   const scrollContainerRef = React.useRef<HTMLDivElement>(null);
@@ -75,6 +76,24 @@ const ServiceSection = () => {
           className="relative col-span-12 lg:col-span-8"
         >
           {/* Scroll Navigation Buttons */}
+          <div className="absolute -top-10 right-0 z-20 rounded-lg border border-zinc-700 bg-black/20 px-2 py-2 backdrop-blur-sm md:hidden">
+            <div className="flex items-center gap-2 text-xs text-zinc-400">
+              <div className="flex gap-1">
+                <div className="h-1 w-1 animate-pulse rounded-full bg-orange-500"></div>
+                <div
+                  className="h-1 w-1 animate-pulse rounded-full bg-orange-500"
+                  style={{ animationDelay: '0.2s' }}
+                ></div>
+                <div
+                  className="h-1 w-1 animate-pulse rounded-full bg-orange-500"
+                  style={{ animationDelay: '0.4s' }}
+                ></div>
+              </div>
+              <span>
+                <ArrowRight size={10} />
+              </span>
+            </div>
+          </div>
           <div className="absolute -top-12 right-0 z-10 hidden gap-4 lg:flex">
             <button
               onClick={scrollLeft}
