@@ -80,7 +80,7 @@ const MenuOverlay: React.FC<MenuOverlayProps> = ({ isOpen, onClose }) => {
                   transition={{ duration: 0.6, delay: 0.5 }}
                 >
                   <Link
-                    href="/work"
+                    href="/about"
                     className="block text-4xl leading-tight font-light text-white transition-colors hover:text-orange-500 focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 focus:ring-offset-black focus:outline-none md:text-8xl lg:text-6xl"
                   >
                     About Us
@@ -101,24 +101,24 @@ const MenuOverlay: React.FC<MenuOverlayProps> = ({ isOpen, onClose }) => {
                 </motion.li>
 
                 <motion.li
-                  initial={{ opacity: 0, y: 50 }}
-                  animate={{ opacity: 1, y: 0 }}
+                  initial={{ opacity: 0, x: -50 }}
+                  animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.6, delay: 0.7 }}
                 >
                   <Link
-                    href="/impact"
+                    href="/portfolio"
                     className="block text-4xl leading-tight font-light text-white transition-colors hover:text-orange-500 focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 focus:ring-offset-black focus:outline-none md:text-8xl lg:text-6xl"
                   >
                     Portfolio
                   </Link>
                 </motion.li>
                 <motion.li
-                  initial={{ opacity: 0, y: 50 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.7 }}
+                  initial={{ opacity: 0, x: 50 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.6, delay: 0.8 }}
                 >
                   <Link
-                    href="/impact"
+                    href="/sertificate"
                     className="block text-4xl leading-tight font-light text-white transition-colors hover:text-orange-500 focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 focus:ring-offset-black focus:outline-none md:text-8xl lg:text-6xl"
                   >
                     Sertificate
@@ -130,7 +130,6 @@ const MenuOverlay: React.FC<MenuOverlayProps> = ({ isOpen, onClose }) => {
             {/* Menu Items */}
           </div>
 
-          {/* Bottom CTA */}
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
