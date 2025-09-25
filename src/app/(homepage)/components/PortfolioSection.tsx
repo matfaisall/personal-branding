@@ -70,21 +70,6 @@ const PortfolioSection = () => {
             >
               <div className="flex gap-6 pb-4" style={{ width: 'max-content' }}>
                 {allItems.map((item: AllPortfolioItems, index: number) => {
-                  // if (isViewMoreItem(item)) {
-                  //   return (
-                  //     <motion.div
-                  //       key={item.id}
-                  //       initial={{ opacity: 0, x: 50 }}
-                  //       animate={{ opacity: 1, x: 0 }}
-                  //       transition={{ duration: 0.5, delay: index * 0.1 }}
-                  //       className="flex w-80 flex-shrink-0"
-                  //       style={{ scrollSnapAlign: 'start' }}
-                  //     >
-                  //       <ViewMoreCard />
-                  //     </motion.div>
-                  //   );
-                  // }
-
                   if (isPortfolioItem(item)) {
                     return (
                       <motion.div
