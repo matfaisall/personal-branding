@@ -130,6 +130,10 @@
     --foreground: 240 10% 3.9%;
   }
 
+  html {
+    scroll-behavior: smooth;
+  }
+
   .dark {
     --background: 240 10% 3.9%;
     --foreground: 0 0% 98%;
@@ -225,3 +229,4 @@
 .scrollbar-visible::-webkit-scrollbar-thumb:hover {
   background: #ea580c;
 }
+

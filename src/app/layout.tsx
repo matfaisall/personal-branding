@@ -1,15 +1,18 @@
 import type { Metadata } from 'next';
 import { Geist_Mono, Inter } from 'next/font/google';
 import './globals.css';
+import SplashWrapper from '@/components/shared/splash-screen/SplashScreenWrapper';
 
 const geistMono = Geist_Mono({
   variable: '--font-geist-mono',
   subsets: ['latin'],
+  preload: true,
 });
 
 const inter = Inter({
   variable: '--font-inter',
   subsets: ['latin'],
+  preload: true,
 });
 
 export const metadata: Metadata = {
@@ -24,7 +27,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${inter.className} ${geistMono.className} antialiased`}>
-      <body className="dark">{children}</body>
+      <body className="dark">
+        <SplashWrapper>{children}</SplashWrapper>
+      </body>
     </html>
   );
 }
