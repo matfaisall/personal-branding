@@ -3,8 +3,8 @@
 import { Button } from '@/components/ui/button';
 import React from 'react';
 import { AnimatePresence, motion, type Variants } from 'motion/react';
-import { Send, FileDown } from 'lucide-react';
-
+import { Send } from 'lucide-react';
+import { ConfirmDownloadDialogs } from '@/components/shared/dialogs/ConfirmDownloadDialogs';
 const ContactUsSection = () => {
   const socialLinks = ['LINKEDIN', 'GITHUB', 'INSTAGRAM', 'DRIBBBLE'];
   const year = new Date().getFullYear();
@@ -292,15 +292,12 @@ const ContactUsSection = () => {
             className="flex flex-wrap justify-center gap-4"
           >
             <motion.div variants={buttonVariants} whileHover="hover" whileTap="tap">
-              <Button
-                size="default"
-                className="text-md px-4 py-3 font-medium transition-all duration-300"
-              >
-                Download CV{' '}
-                <span>
-                  <FileDown strokeWidth={1.25} size={12} />
-                </span>
-              </Button>
+              {/* download cta */}
+              <ConfirmDownloadDialogs
+                triggerLabel="Download CV"
+                filePath="/cv/muhammad-faisal'scv.pdf"
+                fileName="muhammad-faisal'scv.pdf"
+              />
             </motion.div>
             <motion.div variants={buttonVariants} whileHover="hover" whileTap="tap">
               <Button
