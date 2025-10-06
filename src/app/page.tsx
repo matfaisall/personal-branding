@@ -10,6 +10,7 @@ import {
 } from './(homepage)/components';
 import RotatingCircleText from '@/assets/icons/RotatingCircleText';
 import CTAPlayButton from '@/assets/icons/CTAPlayButton';
+import ScrollIndicator from '@/elements/scroll-indicator';
 
 // this is the main page
 export default function Home() {
@@ -25,6 +26,8 @@ export default function Home() {
         <RotatingCircleText />
         {/* badges: bottom right corner */}
         <CTAPlayButton />
+
+        <ScrollIndicator />
       </div>
 
       {/* about section */}
