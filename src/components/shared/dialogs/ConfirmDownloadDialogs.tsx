@@ -58,10 +58,13 @@ export const ConfirmDownloadDialogs = ({
         </DialogHeader>
 
         <DialogFooter className="flex w-full gap-4 sm:justify-center">
-          <Button variant="outline" onClick={() => setOpen(false)}>
+          <Button variant="outline" onClick={() => setOpen(false)} className="cursor-pointer">
             Cancel
           </Button>
-          <Button className="bg-orange-500 text-white hover:bg-orange-600" onClick={handleDownload}>
+          <Button
+            className="cursor-pointer bg-orange-500 text-white hover:bg-orange-600"
+            onClick={handleDownload}
+          >
             Yes, Download
           </Button>
         </DialogFooter>
