@@ -3,7 +3,7 @@
 import React from 'react';
 import TitleSection from '@/elements/title-section';
 import { portfolioItems } from '@/constant/section/portfolio';
-import { PortfolioCard } from './shared/PortfolioCard';
+import { PortfolioCard } from '@/components/shared/card-portfolio';
 import { motion } from 'motion/react';
 import { AllPortfolioItems, PortfolioItem } from '@/types/mainpage/section/portfolio.types';
 import { Button } from '@/components/ui/button';

@@ -4,7 +4,7 @@ import dynamic from 'next/dynamic';
 import { AnimatePresence } from 'motion/react';
 import { useSplash } from '@/hooks/useSplash';
 
-const SplashScreen = dynamic(() => import('./SplashScreen'), {
+const SplashScreen = dynamic(() => import('.'), {
   ssr: false,
 });
 

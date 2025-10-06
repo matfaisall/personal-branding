@@ -7,7 +7,7 @@ import {
   ServiceSection,
   PortfolioSection,
   ContactUsSection,
-} from './(homepage)/components';
+} from '@/components/sections/homepage';
 import RotatingCircleText from '@/assets/icons/RotatingCircleText';
 import CTAPlayButton from '@/assets/icons/CTAPlayButton';
 import ScrollIndicator from '@/elements/scroll-indicator';
@@ -16,7 +16,6 @@ import ScrollIndicator from '@/elements/scroll-indicator';
 export default function Home() {
   return (
     <div className="overflow-hidden dark:bg-black dark:text-white">
-      {/* main section : navbar, sidenav, text marquee and hero section */}
       <div className="relative min-h-svh">
         <NavigationBar />
         <SideNav />
@@ -24,7 +23,6 @@ export default function Home() {
         <HeroSection />
 
         <RotatingCircleText />
-        {/* badges: bottom right corner */}
         <CTAPlayButton />
 
         <ScrollIndicator />
