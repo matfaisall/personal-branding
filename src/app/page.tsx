@@ -11,12 +11,14 @@ import {
 import RotatingCircleText from '@/assets/icons/RotatingCircleText';
 import CTAPlayButton from '@/assets/icons/CTAPlayButton';
 import ScrollIndicator from '@/elements/scroll-indicator';
+import UnderDevelopmentModal from '@/components/shared/dialogs/UnderDevelopmentDialogs';
 
 // this is the main page
 export default function Home() {
   return (
     <div className="overflow-hidden dark:bg-black dark:text-white">
-      <div className="relative min-h-svh">
+      <div className="min-h-sm relative">
+        <UnderDevelopmentModal />
         <NavigationBar />
         <SideNav />
         <MarqueeSection />

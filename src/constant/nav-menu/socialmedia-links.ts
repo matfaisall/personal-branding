@@ -19,10 +19,16 @@ export const socialMediaLinks: SocialMediaLinksProps[] = [
     url: 'https://www.instagram.com/matfaisall/',
     alias: 'IG',
   },
+  // {
+  //   id: 'dribbble',
+  //   name: 'Dribbble',
+  //   url: 'https://dribbble.com/matfaisall',
+  //   alias: 'DB',
+  // },
   {
-    id: 'dribbble',
-    name: 'Dribbble',
-    url: 'https://dribbble.com/matfaisall',
-    alias: 'DB',
+    id: 'leetcode',
+    name: 'Leet Code',
+    url: 'https://leetcode.com/u/matfaisall/',
+    alias: 'LC',
   },
 ];
