@@ -1,4 +1,4 @@
-import { PortfolioItem } from '@/types/mainpage/section/portfolio';
+import { PortfolioItem } from '@/types/mainpage/section/portfolio.types';
 
 export const portfolioItems: PortfolioItem[] = [
   {

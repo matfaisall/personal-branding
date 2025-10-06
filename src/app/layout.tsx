@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { Geist_Mono, Inter } from 'next/font/google';
 import './globals.css';
-import SplashWrapper from '@/components/shared/splash-screen/SplashScreenWrapper';
+// import SplashWrapper from '@/components/shared/splash-screen/SplashScreenWrapper';
 
 const geistMono = Geist_Mono({
   variable: '--font-geist-mono',
@@ -27,9 +27,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${inter.className} ${geistMono.className} antialiased`}>
-      <body className="dark">
-        <SplashWrapper>{children}</SplashWrapper>
-      </body>
+      <body className="dark">{children}</body>
     </html>
   );
 }

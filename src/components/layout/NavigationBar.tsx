@@ -5,9 +5,13 @@ import React from 'react';
 import MenuIcon from '@/assets/icons/MenuButton.svg';
 import Image from 'next/image';
 import MenuOverlay from './MenuOverlay';
+import { socialMediaLinks } from '@/constant/nav-menu/socialmedia-links';
+
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+import Link from 'next/link';
 
 const NavigationBar = () => {
-  const languages = ['FB', 'IN', 'DR', 'BE'];
+  // const languages = ['FB', 'IN', 'DR', 'BE'];
 
   const [isMobile, setIsMobile] = React.useState(true);
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
@@ -49,27 +53,39 @@ const NavigationBar = () => {
               className="flex items-center gap-8"
             >
               <div className="flex gap-4 text-sm text-gray-500">
-                {languages.map((lang, i) => (
-                  <span key={lang} className="flex items-center gap-2">
-                    {i > 0 && (
-                      <motion.span
-                        initial={{ scale: 0 }}
-                        animate={{ scale: 1 }}
-                        transition={{ duration: 0.2 }}
-                        className="text-orange-500"
-                      >
-                        •
-                      </motion.span>
-                    )}
-                    <motion.span
-                      whileHover={{ color: '#ffffff' }}
-                      transition={{ duration: 0.2 }}
-                      className="cursor-pointer transition-colors"
-                    >
-                      {lang}
-                    </motion.span>
-                  </span>
-                ))}
+                <TooltipProvider delayDuration={200}>
+                  {socialMediaLinks?.map((sosmed, i) => (
+                    <span key={sosmed.id} className="flex items-center gap-2">
+                      {i > 0 && (
+                        <motion.span
+                          initial={{ scale: 0 }}
+                          animate={{ scale: 1 }}
+                          transition={{ duration: 0.2 }}
+                          className="text-orange-500"
+                        >
+                          •
+                        </motion.span>
+                      )}
+
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <Link href={sosmed.url} target="_blank" rel="noopener noreferrer">
+                            <motion.span
+                              whileHover={{ color: '#ffffff' }}
+                              transition={{ duration: 0.2 }}
+                              className="cursor-pointer transition-colors"
+                            >
+                              {sosmed.alias}
+                            </motion.span>
+                          </Link>
+                        </TooltipTrigger>
+                        <TooltipContent className="border border-gray-700 p-2">
+                          <p className="text-gray-400">{sosmed.name}</p>
+                        </TooltipContent>
+                      </Tooltip>
+                    </span>
+                  ))}
+                </TooltipProvider>
               </div>
             </motion.div>
           )}

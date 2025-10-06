@@ -3,7 +3,7 @@
 import React from 'react';
 import Image from 'next/image';
 import { motion } from 'motion/react';
-import { PortfolioItem } from '@/types/mainpage/section/portfolio';
+import { PortfolioItem } from '@/types/mainpage/section/portfolio.types';
 import GithubIcon from '@/assets/icons/light-github-icon.svg';
 import { Link } from 'lucide-react';
 

@@ -5,8 +5,10 @@ import React from 'react';
 import { AnimatePresence, motion, type Variants } from 'motion/react';
 import { Send } from 'lucide-react';
 import { ConfirmDownloadDialogs } from '@/components/shared/dialogs/ConfirmDownloadDialogs';
+import { socialMediaLinks } from '@/constant/nav-menu/socialmedia-links';
+import Link from 'next/link';
+
 const ContactUsSection = () => {
-  const socialLinks = ['LINKEDIN', 'GITHUB', 'INSTAGRAM', 'DRIBBBLE'];
   const year = new Date().getFullYear();
 
   // 🎭 ANIMATION VARIANTS
@@ -303,7 +305,8 @@ const ContactUsSection = () => {
               <Button
                 size="default"
                 variant="outline"
-                className="text-md px-4 py-3 font-medium transition-all duration-300"
+                className="text-md cursor-pointer px-4 py-3 font-medium transition-all duration-300 hover:bg-white/10"
+                onClick={() => (window.location.href = 'mailto:muh.faisal572@gmail.com')}
               >
                 Get in Touch{' '}
                 <span>
@@ -316,15 +319,8 @@ const ContactUsSection = () => {
           {/* 🎯 FOOTER SECTION */}
           <motion.div
             variants={footerVariants}
-            className="mt-24 flex flex-col items-center justify-between gap-8 md:flex-row"
+            className="mt-24 flex flex-col items-center justify-between gap-8 lg:flex-row"
           >
-            {/* Copyright */}
-            <motion.div whileHover={{ scale: 1.02 }} transition={{ duration: 0.2 }}>
-              <p className="text-base font-medium text-gray-500">
-                © {year}. Developed and Designed by Muhammad Faisal
-              </p>
-            </motion.div>
-
             {/* Social Links Card */}
             <motion.div
               variants={socialCardVariants}
@@ -332,7 +328,7 @@ const ContactUsSection = () => {
                 scale: 1.02,
                 boxShadow: '0 20px 40px rgba(0,0,0,0.1)',
               }}
-              className="rounded-xl bg-black py-4 backdrop-blur-md"
+              className="order-1 rounded-xl bg-black py-4 backdrop-blur-md lg:order-2"
             >
               <AnimatePresence mode="wait">
                 <motion.div
@@ -351,9 +347,9 @@ const ContactUsSection = () => {
                     },
                   }}
                 >
-                  {socialLinks.map((link, index) => (
+                  {socialMediaLinks.map((sosmed, index) => (
                     <motion.div
-                      key={link}
+                      key={sosmed.id}
                       variants={socialItemVariants}
                       className="flex items-center gap-2"
                     >
@@ -363,20 +359,33 @@ const ContactUsSection = () => {
                           className="h-1 w-1 rounded-full bg-orange-500"
                         />
                       )}
-                      <motion.span
-                        whileHover={{
-                          color: '#ffffff',
-                          scale: 1.1,
-                        }}
-                        transition={{ duration: 0.2 }}
-                        className="cursor-pointer text-sm font-medium text-gray-400 transition-colors hover:text-white"
-                      >
-                        {link}
-                      </motion.span>
+                      <Link href={sosmed.url} target="_blank" rel="noopener noreferrer">
+                        <motion.span
+                          whileHover={{
+                            color: '#ffffff',
+                            scale: 1.1,
+                          }}
+                          transition={{ duration: 0.2 }}
+                          className="cursor-pointer text-sm font-medium text-gray-400 uppercase transition-colors hover:text-white"
+                        >
+                          {sosmed.name}
+                        </motion.span>
+                      </Link>
                     </motion.div>
                   ))}
                 </motion.div>
               </AnimatePresence>
+            </motion.div>
+
+            {/* Copyright */}
+            <motion.div
+              whileHover={{ scale: 1.02 }}
+              transition={{ duration: 0.2 }}
+              className="order-2 lg:order-1"
+            >
+              <p className="text-base font-medium text-gray-500">
+                © {year}. Developed and Designed by Muhammad Faisal
+              </p>
             </motion.div>
           </motion.div>
         </motion.div>
