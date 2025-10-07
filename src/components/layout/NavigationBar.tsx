@@ -7,14 +7,20 @@ import Image from 'next/image';
 import MenuOverlay from './MenuOverlay';
 import { socialMediaLinks } from '@/constant/nav-menu/socialmedia-links';
 
+import { usePathname } from 'next/navigation';
+
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import Link from 'next/link';
 
 const NavigationBar = () => {
-  // const languages = ['FB', 'IN', 'DR', 'BE'];
-
+  const pathname = usePathname();
   const [isMobile, setIsMobile] = React.useState(true);
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+
+  // close menu on route change
+  React.useEffect(() => {
+    setIsMenuOpen(false);
+  }, [pathname]);
 
   // Detect screen width (client-side)
   React.useEffect(() => {
@@ -98,7 +104,7 @@ const NavigationBar = () => {
           transition={{ duration: 0.5, ease: 'easeOut' }}
           className="text-xl font-light tracking-wider text-white md:text-3xl"
         >
-          faisal
+          <Link href="/">faisal</Link>
         </motion.div>
 
         <motion.div

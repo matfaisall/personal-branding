@@ -1,4 +1,4 @@
-import NavigationBar from '@/components/layout/NavigationBar';
+// import NavigationBar from '@/components/layout/NavigationBar';
 import SideNav from '@/components/layout/SideNav';
 import MarqueeSection from '@/components/layout/Marquee';
 import {
@@ -19,7 +19,7 @@ export default function Home() {
     <div className="overflow-hidden dark:bg-black dark:text-white">
       <div className="min-h-sm relative">
         <UnderDevelopmentModal />
-        <NavigationBar />
+        {/* <NavigationBar /> */}
         <SideNav />
         <MarqueeSection />
         <HeroSection />

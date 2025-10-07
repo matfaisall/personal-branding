@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Geist_Mono, Inter } from 'next/font/google';
 import './globals.css';
 // import SplashWrapper from '@/components/shared/splash-screen/SplashScreenWrapper';
+import NavigationBar from '@/components/layout/NavigationBar';
 
 const geistMono = Geist_Mono({
   variable: '--font-geist-mono',
@@ -27,7 +28,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${inter.className} ${geistMono.className} antialiased`}>
-      <body className="dark">{children}</body>
+      <body className="dark">
+        <NavigationBar />
+        {children}
+      </body>
     </html>
   );
 }
