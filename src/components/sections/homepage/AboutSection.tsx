@@ -8,7 +8,7 @@ const AboutSection = () => {
   return (
     <section className="container-fluid h-full w-full overflow-hidden p-8">
       {/* title for section */}
-      <TitleSection title="about us" />
+      <TitleSection title="about us" withUnderline />
 
       <div className="grid grid-cols-12 p-0 lg:p-8">
         <div className="col-span-12 md:col-span-4">

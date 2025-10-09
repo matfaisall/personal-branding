@@ -45,7 +45,7 @@ const ServiceSection = () => {
 
   return (
     <div className="container-fluid h-full w-full p-8">
-      <TitleSection title="services" />
+      <TitleSection title="services" withUnderline />
 
       {/* content */}
       <div className="grid grid-cols-12 gap-4 p-0 lg:p-8">

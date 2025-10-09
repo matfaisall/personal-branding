@@ -19,7 +19,7 @@ const PortfolioSection = () => {
 
   return (
     <div className="container-fluid h-full p-8">
-      <TitleSection title="portfolio" />
+      <TitleSection title="portfolio" withUnderline />
 
       <div className="lg:p8 grid grid-cols-12 p-0">
         {/* left side */}
