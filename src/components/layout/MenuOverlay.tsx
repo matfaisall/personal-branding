@@ -136,7 +136,7 @@ const MenuOverlay: React.FC<MenuOverlayProps> = ({ isOpen, onClose }) => {
                     >
                       <Link
                         href={menu.href}
-                        className={`${pathname === menu.href ? 'text-orange-500 underline' : 'text-white'} block text-4xl leading-tight font-light transition-colors hover:text-orange-500 focus:ring-orange-500 focus:ring-offset-2 focus:outline-none md:text-8xl lg:text-6xl`}
+                        className={`${pathname === menu.href ? 'text-orange-500' : 'text-white'} block text-4xl leading-tight font-light transition-colors hover:text-orange-500 focus:ring-orange-500 focus:ring-offset-2 focus:outline-none md:text-8xl lg:text-6xl`}
                       >
                         {menu.title}
                       </Link>
