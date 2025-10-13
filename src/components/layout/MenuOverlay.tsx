@@ -5,8 +5,10 @@ import { CircleX } from 'lucide-react';
 import Link from 'next/link';
 import { socialMediaLinks } from '@/constant/nav-menu/socialmedia-links';
 import { navigationMenu } from '@/constant/nav-menu/navigation-menu';
+import { usePathname } from 'next/navigation';
 
 const MenuOverlay: React.FC<MenuOverlayProps> = ({ isOpen, onClose }) => {
+  const pathname = usePathname();
   const [isMobile, setIsMobile] = React.useState<boolean>(true);
 
   React.useEffect(() => {
@@ -124,6 +126,7 @@ const MenuOverlay: React.FC<MenuOverlayProps> = ({ isOpen, onClose }) => {
             >
               <ul className="list-none space-y-4 md:space-y-6">
                 {navigationMenu.map((menu) => {
+                  console.log('menu', menu.href);
                   return (
                     <motion.li
                       key={menu.id}
@@ -133,7 +136,7 @@ const MenuOverlay: React.FC<MenuOverlayProps> = ({ isOpen, onClose }) => {
                     >
                       <Link
                         href={menu.href}
-                        className="block text-4xl leading-tight font-light text-white transition-colors hover:text-orange-500 focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 focus:ring-offset-black focus:outline-none md:text-8xl lg:text-6xl"
+                        className={`${pathname === menu.href ? 'text-orange-500 underline' : 'text-white'} block text-4xl leading-tight font-light transition-colors hover:text-orange-500 focus:ring-orange-500 focus:ring-offset-2 focus:outline-none md:text-8xl lg:text-6xl`}
                       >
                         {menu.title}
                       </Link>
