@@ -9,6 +9,8 @@ import StatusIndicator from '@/components/shared/status-indicator';
 import InfiniteScrollCarousel from '@/components/shared/infinite-scroll';
 import { techStackFromLeft, techStackFromRight } from '@/constant/tech-stack';
 
+import { ContactUsSection } from '@/components/sections/homepage';
+
 import {
   pageVariants,
   headerVariants,
@@ -634,7 +636,6 @@ const CertificateSection: React.FC = () => {
 const AboutPage: React.FC = () => {
   return (
     <div className="overflow-hidden dark:bg-black dark:text-white">
-      {/* Hero Section - Full Screen */}
       <section className="container-fluid relative flex min-h-dvh w-full flex-col justify-center px-4 py-16 sm:px-6 sm:py-20">
         <motion.div
           className="flex flex-col gap-12 sm:gap-16"
@@ -653,12 +654,13 @@ const AboutPage: React.FC = () => {
         </motion.div>
       </section>
 
-      {/* Education Section - Below Hero */}
       <EducationSection />
 
       <ExperienceSection />
 
       <CertificateSection />
+
+      <ContactUsSection />
     </div>
   );
 };

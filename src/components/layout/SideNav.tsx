@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import { motion, useScroll, useTransform } from "motion/react";
-import React from "react";
+import { motion, useScroll, useTransform } from 'motion/react';
+import React from 'react';
 
 export default function SideNav() {
-  const items = ["DIGITAL MARKETING", "DESIGNING", "DEVELOPMENT"];
+  const items = ['WEB DISIGN', 'UI/UX DESIGN', 'FRONTEND DEVELOPMENT'];
 
   const ref = React.useRef(null);
   const { scrollY } = useScroll();
@@ -15,11 +15,11 @@ export default function SideNav() {
     <motion.div
       ref={ref}
       style={{ opacity, x }}
-      className="absolute left-8 top-1/2 -translate-y-1/2 z-40 hidden md:block"
+      className="absolute top-1/2 left-8 z-40 hidden -translate-y-1/2 md:block"
     >
       {items.map((item) => (
         <div key={item} className="mb-12">
-          <div className="writing-vertical text-xs text-gray-600 tracking-widest hover:text-orange-500 transition-colors cursor-pointer">
+          <div className="writing-vertical cursor-pointer text-xs tracking-widest text-gray-600 transition-colors hover:text-orange-500">
             {item}
           </div>
         </div>
