@@ -1,15 +1,10 @@
 'use client';
 import React from 'react';
 import { CardListInterface } from '@/types/certificate';
-import { motion } from 'motion/react';
+import { motion, type Easing } from 'motion/react';
 import { Plus } from 'lucide-react';
 
-export const SPRING_CONFIG = {
-  type: 'spring' as const,
-  stiffness: 300,
-  damping: 20,
-  duration: 1.2,
-};
+const SMOOTH_EASE: Easing = [0.25, 0.1, 0.25, 1]; // ease-out-cubic
 
 interface CardProps {
   feature: CardListInterface;
@@ -22,97 +17,69 @@ const CardComp = React.memo<CardProps>(
   ({ feature, onClick, showExpandButton = true, index = 0 }) => {
     return (
       <motion.div
-        layoutId={`feature-${feature.id}`}
-        className="group relative mx-auto flex h-full max-w-full cursor-pointer flex-col rounded-4xl border border-[rgba(255,255,255,0.03)] bg-[#1a1a1a]/50 p-2 transition-all duration-300 hover:bg-[#1f1f1f]/60 md:p-6"
+        className="group relative mx-auto flex h-full w-full cursor-pointer flex-col rounded-3xl border border-white/[0.03] bg-[#1a1a1a]/50 p-4 backdrop-blur-sm will-change-transform hover:bg-[#1f1f1f]/60 md:p-6"
         onClick={onClick}
-        transition={SPRING_CONFIG}
         role="button"
         aria-label={`Open ${feature.title} details`}
         tabIndex={0}
-        initial={{ opacity: 0, y: 50, scale: 0.9 }}
+        initial={{ opacity: 0, y: 20 }}
         animate={{
           opacity: 1,
           y: 0,
-          scale: 1,
-          transition: {
-            duration: 0.6,
-            delay: index * 0.1,
-            ease: [0.25, 0.46, 0.45, 0.94],
-          },
+        }}
+        transition={{
+          duration: 0.3,
+          delay: index * 0.03,
+          ease: SMOOTH_EASE,
         }}
         whileHover={{
-          y: -8,
-          scale: 1.02,
-          transition: { duration: 0.3 },
+          y: -4,
         }}
         whileTap={{ scale: 0.98 }}
       >
         {showExpandButton && (
           <motion.button
-            className="absolute right-6 bottom-6 z-10 flex h-8 w-8 cursor-pointer items-center justify-center rounded-full border border-orange-500 transition-colors"
+            className="absolute right-4 bottom-4 z-10 flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-orange-500/60 bg-orange-500/5 backdrop-blur-sm transition-all duration-200 hover:border-orange-500 hover:bg-orange-500/10 md:right-6 md:bottom-6"
             aria-label="Expand feature"
             tabIndex={-1}
-            initial={{ opacity: 0, scale: 0 }}
+            initial={{ opacity: 0, scale: 0.8 }}
             animate={{
               opacity: 1,
               scale: 1,
-              transition: {
-                delay: index * 0.1 + 0.4,
-                duration: 0.4,
-                type: 'spring',
-                stiffness: 200,
-              },
+            }}
+            transition={{
+              delay: index * 0.03 + 0.15,
+              duration: 0.25,
+              ease: SMOOTH_EASE,
             }}
             whileHover={{
-              scale: 1.1,
+              scale: 1.05,
               rotate: 90,
-              transition: { duration: 0.3 },
             }}
           >
-            <Plus className="size-4 text-orange-500" />
+            <Plus className="h-5 w-5 text-orange-500" />
           </motion.button>
         )}
 
-        {/* Container gambar dengan aspect ratio fixed */}
-        <motion.div
-          layoutId={`illustration-${feature.id}`}
-          className="relative w-full flex-shrink-0 overflow-hidden rounded-2xl"
-          style={{ aspectRatio: '3 / 2' }} // Force aspect ratio 2:1 (landscape)
-          // initial={{ opacity: 0, scale: 0.8 }}
-          animate={{
-            opacity: 1,
-            scale: 1,
-            transition: {
-              delay: index * 0.1 + 0.2,
-              duration: 0.5,
-            },
-          }}
+        {/* Image Container */}
+        <div
+          className="relative w-full flex-shrink-0 overflow-hidden rounded-2xl bg-[#0d0d0d]"
+          style={{ aspectRatio: '3 / 2' }}
         >
           <img
             src={feature.imageSrc}
             alt={feature.imageAlt}
-            className="absolute inset-0 h-full w-full rounded-2xl object-cover object-center"
-            loading={feature.id === 1 ? 'eager' : 'lazy'}
+            className="h-full w-full rounded-2xl object-cover object-center transition-transform duration-300 group-hover:scale-105"
+            loading={index < 3 ? 'eager' : 'lazy'}
+            decoding="async"
           />
-        </motion.div>
+        </div>
 
-        {/* Title area */}
-        <div className="mt-6 flex flex-grow items-start">
-          <motion.h3
-            layoutId={`title-${feature.id}`}
-            className="text-xl leading-tight font-medium text-balance"
-            initial={{ opacity: 0, x: -20 }}
-            animate={{
-              opacity: 1,
-              x: 0,
-              transition: {
-                delay: index * 0.1 + 0.3,
-                duration: 0.5,
-              },
-            }}
-          >
+        {/* Title */}
+        <div className="mt-4 flex min-h-[60px] flex-grow items-start md:mt-6">
+          <h3 className="line-clamp-2 text-lg leading-snug font-medium text-balance md:text-xl">
             {feature.title}
-          </motion.h3>
+          </h3>
         </div>
       </motion.div>
     );

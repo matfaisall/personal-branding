@@ -5,13 +5,14 @@ import { LIST_CERTIFICATES } from '@/constant/section/certificates';
 import CardComp from '@/components/shared/card';
 import CardModal from '@/components/shared/card-modal';
 import { containerVariants, headerVariants, subtitleVariants } from './motion.page';
+import ContactFooterFixed from './shared/Footer';
 
 const CertificatePage: React.FC = () => {
   const [selectedFeature, setSelectedFeature] = React.useState<number | null>(null);
 
-  // const handleOpenFeature = useCallback((id: number) => {
-  //   setSelectedFeature(id);
-  // }, []);
+  const handleOpenFeature = useCallback((id: number) => {
+    setSelectedFeature(id);
+  }, []);
 
   const handleCloseModal = useCallback(() => {
     setSelectedFeature(null);
@@ -25,7 +26,7 @@ const CertificatePage: React.FC = () => {
   return (
     <div className="min-h-dvh overflow-hidden dark:bg-black dark:text-white">
       <section className="container-fluid relative mt-32 flex w-full flex-col justify-center px-4 sm:px-6 sm:py-20 md:mt-12">
-        {/* Header Section with Enhanced Animations */}
+        {/* Header Section */}
         <motion.div
           className="relative z-10 mb-12 flex flex-col gap-4"
           variants={containerVariants}
@@ -47,35 +48,39 @@ const CertificatePage: React.FC = () => {
           </motion.p>
         </motion.div>
 
-        {/* Grid Section with Stagger Animation */}
+        {/* Grid Section */}
         <motion.div
           className="relative z-10 w-full"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.5, delay: 0.6 }}
+          transition={{ duration: 0.4, delay: 0.5 }}
         >
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {LIST_CERTIFICATES.map((list, index) => (
-              <div key={list.id} className="mx-0 h-full">
-                {/* buat onClick kosong dan show ExpandButton false agar tidak memunculkan modal */}
-                {selectedFeature !== list.id && (
-                  <CardComp
-                    feature={list}
-                    // onClick={() => handleOpenFeature(feature.id)}
-                    showExpandButton={false}
-                    index={index}
-                  />
-                )}
-              </div>
-            ))}
-          </div>
+          <AnimatePresence mode="popLayout">
+            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+              {LIST_CERTIFICATES.map((list, index) => (
+                <React.Fragment key={list.id}>
+                  {selectedFeature !== list.id && (
+                    <CardComp
+                      feature={list}
+                      onClick={() => handleOpenFeature(list.id)}
+                      showExpandButton={true}
+                      index={index}
+                    />
+                  )}
+                </React.Fragment>
+              ))}
+            </div>
+          </AnimatePresence>
         </motion.div>
 
+        {/* Modal */}
         <AnimatePresence mode="wait">
           {selectedFeature && selectedFeatureData && (
             <CardModal feature={selectedFeatureData} onClose={handleCloseModal} />
           )}
         </AnimatePresence>
+
+        <ContactFooterFixed />
       </section>
     </div>
   );
