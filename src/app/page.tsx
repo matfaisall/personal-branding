@@ -6,12 +6,13 @@ import {
   AboutSection,
   ServiceSection,
   PortfolioSection,
-  ContactUsSection,
+  // ContactUsSection,
 } from '@/components/sections/homepage';
 import RotatingCircleText from '@/assets/icons/RotatingCircleText';
 import CTAPlayButton from '@/assets/icons/CTAPlayButton';
 import ScrollIndicator from '@/elements/scroll-indicator';
 import UnderDevelopmentModal from '@/components/shared/dialogs/UnderDevelopmentDialogs';
+import { ContactFooter } from '@/components/shared/footer';
 
 // this is the main page
 export default function Home() {
@@ -46,9 +47,10 @@ export default function Home() {
       </div>
 
       {/*  */}
-      <div className="min-h-[65svh]">
-        <ContactUsSection />
-      </div>
+
+      <section className="container-fluid relative mt-32 flex w-full flex-col justify-center px-4 sm:px-6 sm:py-20 md:mt-12">
+        <ContactFooter />
+      </section>
     </div>
   );
 }

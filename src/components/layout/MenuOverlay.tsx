@@ -1,11 +1,11 @@
 import React from 'react';
-import { motion, AnimatePresence, type Variants } from 'motion/react';
+import { motion, AnimatePresence } from 'motion/react';
 import { MenuOverlayProps } from '@/types/menu.types';
 import { CircleX } from 'lucide-react';
 import Link from 'next/link';
-import { socialMediaLinks } from '@/constant/nav-menu/socialmedia-links';
 import { navigationMenu } from '@/constant/nav-menu/navigation-menu';
 import { usePathname } from 'next/navigation';
+import CopyRightAndSocMed from '../shared/copyright';
 
 const MenuOverlay: React.FC<MenuOverlayProps> = ({ isOpen, onClose }) => {
   const pathname = usePathname();
@@ -20,54 +20,6 @@ const MenuOverlay: React.FC<MenuOverlayProps> = ({ isOpen, onClose }) => {
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
-
-  const socialCardVariants: Variants = {
-    hidden: {
-      opacity: 0,
-      scale: 0.8,
-      x: 50,
-    },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      x: 0,
-      transition: {
-        duration: 0.7,
-        ease: [0.25, 0.46, 0.45, 0.94],
-        delay: 2.5,
-      },
-    },
-  };
-
-  const socialItemVariants: Variants = {
-    hidden: {
-      opacity: 0,
-      x: 20,
-    },
-    visible: {
-      opacity: 1,
-      x: 0,
-      transition: {
-        duration: 0.4,
-        ease: 'easeOut',
-      },
-    },
-  };
-
-  const dotVariants: Variants = {
-    hidden: {
-      scale: 0,
-      opacity: 0,
-    },
-    visible: {
-      scale: 1,
-      opacity: 1,
-      transition: {
-        duration: 0.3,
-        ease: 'easeOut',
-      },
-    },
-  };
 
   return (
     <AnimatePresence>
@@ -145,8 +97,6 @@ const MenuOverlay: React.FC<MenuOverlayProps> = ({ isOpen, onClose }) => {
                 })}
               </ul>
             </motion.nav>
-
-            {/* Menu Items */}
           </div>
 
           <motion.div
@@ -155,73 +105,8 @@ const MenuOverlay: React.FC<MenuOverlayProps> = ({ isOpen, onClose }) => {
             transition={{ duration: 0.6, delay: 1.2 }}
             className="absolute right-8 bottom-8 left-8"
           >
-            <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-              {/* Social Links Card */}
-              <motion.div
-                variants={socialCardVariants}
-                whileHover={{
-                  scale: 1.02,
-                  boxShadow: '0 20px 40px rgba(0,0,0,0.1)',
-                }}
-                className="order-1 rounded-xl bg-black py-4 backdrop-blur-md lg:order-2"
-              >
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    initial="hidden"
-                    animate="visible"
-                    exit="hidden"
-                    className="flex flex-wrap items-center justify-center gap-4"
-                    variants={{
-                      hidden: { opacity: 0 },
-                      visible: {
-                        opacity: 1,
-                        transition: {
-                          staggerChildren: 0.1,
-                          delayChildren: 0.2,
-                        },
-                      },
-                    }}
-                  >
-                    {socialMediaLinks.map((sosmed, index) => (
-                      <motion.div
-                        key={sosmed.id}
-                        variants={socialItemVariants}
-                        className="flex items-center gap-2"
-                      >
-                        {index > 0 && (
-                          <motion.span
-                            variants={dotVariants}
-                            className="h-1 w-1 rounded-full bg-orange-500"
-                          />
-                        )}
-                        <Link href={sosmed.url} target="_blank" rel="noopener noreferrer">
-                          <motion.span
-                            whileHover={{
-                              color: '#ffffff',
-                              scale: 1.1,
-                            }}
-                            transition={{ duration: 0.2 }}
-                            className="cursor-pointer text-sm font-medium text-gray-400 uppercase transition-colors hover:text-white"
-                          >
-                            {sosmed.name}
-                          </motion.span>
-                        </Link>
-                      </motion.div>
-                    ))}
-                  </motion.div>
-                </AnimatePresence>
-              </motion.div>
-
-              <motion.p
-                whileHover={{ scale: 1.01 }}
-                className="flex max-w-md justify-center text-base text-white md:justify-start md:text-lg"
-              >
-                Have any project in mind?
-                <motion.span className="cursor-pointer font-bold transition-colors hover:text-orange-500">
-                  {'  '} Lets work together.
-                </motion.span>
-              </motion.p>
-            </div>
+            {/* copyright and social media */}
+            <CopyRightAndSocMed paddingYSM="0" paddingYLG="0" />
           </motion.div>
         </motion.div>
       )}

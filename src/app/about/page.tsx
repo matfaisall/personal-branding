@@ -9,7 +9,7 @@ import StatusIndicator from '@/components/shared/status-indicator';
 import InfiniteScrollCarousel from '@/components/shared/infinite-scroll';
 import { techStackFromLeft, techStackFromRight } from '@/constant/tech-stack';
 
-import { ContactUsSection } from '@/components/sections/homepage';
+// import { ContactUsSection } from '@/components/sections/homepage';
 
 import {
   pageVariants,
@@ -26,6 +26,7 @@ import {
 import { BIO_PARAGRAPHS, EDUCATION_DATA } from '@/constant/data/about/educations';
 import { EXPERIENCE_DATA } from '@/constant/data/about/experiences';
 import { CERTIFICATE_DATA } from '@/constant/data/about/certificates';
+import { ContactFooter } from '@/components/shared/footer';
 
 // ==================== Sub Components ====================
 const ProfileHeader: React.FC = () => {
@@ -660,7 +661,9 @@ const AboutPage: React.FC = () => {
 
       <CertificateSection />
 
-      <ContactUsSection />
+      <section className="container-fluid relative mt-32 flex w-full flex-col justify-center px-4 sm:px-6 sm:py-20 md:mt-12">
+        <ContactFooter />
+      </section>
     </div>
   );
 };

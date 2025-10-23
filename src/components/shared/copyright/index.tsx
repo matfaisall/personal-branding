@@ -5,10 +5,10 @@ import Link from 'next/link';
 import { socialItemVariants, dotVariants } from './copyright.motion';
 
 const SMOOTH_EASE: Easing = [0.22, 0.61, 0.36, 1];
-const CopyRightAndSocMed = () => {
+const CopyRightAndSocMed = ({ paddingYSM = '10', paddingYLG = '12' }) => {
   return (
     <motion.footer
-      className="w-full py-10 lg:py-12"
+      className={`w-full py-${paddingYSM} lg:py-${paddingYLG}`}
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}

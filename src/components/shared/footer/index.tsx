@@ -1,92 +1,23 @@
 'use client';
 
 import React from 'react';
-import { motion, type Variants, type Easing } from 'motion/react';
+import { motion } from 'motion/react';
 import { Send } from 'lucide-react';
 import { ConfirmDownloadDialogs } from '@/components/shared/dialogs/ConfirmDownloadDialogs';
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
+import {
+  SMOOTH_EASE,
+  containerVariants,
+  itemVariants,
+  labelVariants,
+  buttonsContainerVariants,
+  buttonVariants,
+} from './footer.motion';
 
 import CopyRightAndSocMed from '@/components/shared/copyright';
-const SMOOTH_EASE: Easing = [0.22, 0.61, 0.36, 1];
 
-export default function ContactFooterAnimated() {
-  // Animation variants
-  const containerVariants: Variants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.15,
-        delayChildren: 0.2,
-      },
-    },
-  };
-
-  const itemVariants: Variants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6,
-        ease: SMOOTH_EASE,
-      },
-    },
-  };
-
-  const labelVariants: Variants = {
-    hidden: { opacity: 0, x: -20 },
-    visible: {
-      opacity: 1,
-      x: 0,
-      transition: {
-        duration: 0.6,
-        ease: SMOOTH_EASE,
-      },
-    },
-  };
-
-  const buttonsContainerVariants: Variants = {
-    hidden: {
-      opacity: 0,
-    },
-    visible: {
-      opacity: 1,
-      transition: {
-        duration: 0.4,
-      },
-    },
-  };
-
-  const buttonVariants: Variants = {
-    hidden: {
-      opacity: 0,
-      scale: 0.8,
-      y: 20,
-    },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      y: 0,
-      transition: {
-        duration: 0.5,
-        ease: [0.25, 0.46, 0.45, 0.94],
-      },
-    },
-    hover: {
-      scale: 1.05,
-      y: -2,
-      transition: {
-        duration: 0.2,
-        ease: 'easeOut',
-      },
-    },
-    tap: {
-      scale: 0.95,
-    },
-  };
-
+export const ContactFooter = () => {
   return (
     <div className="w-full">
       {/* Main Contact Section */}
@@ -213,4 +144,4 @@ export default function ContactFooterAnimated() {
       </motion.div>
     </div>
   );
-}
+};

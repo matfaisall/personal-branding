@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { ContactUsSection } from '@/components/sections/homepage';
+import { ContactFooter } from '@/components/shared/footer';
 
 import Image from 'next/image';
 
@@ -153,9 +153,9 @@ const WorksPage: React.FC = () => {
             <p className="text-xl text-gray-400">No projects found in this category</p>
           </motion.div>
         )}
-      </section>
 
-      <ContactUsSection />
+        <ContactFooter />
+      </section>
     </div>
   );
 };
