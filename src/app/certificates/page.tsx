@@ -5,7 +5,7 @@ import { LIST_CERTIFICATES } from '@/constant/section/certificates';
 import CardComp from '@/components/shared/card';
 import CardModal from '@/components/shared/card-modal';
 import { containerVariants, headerVariants, subtitleVariants } from './motion.page';
-import ContactFooterFixed from './shared/Footer';
+import ContactFooterFixed from '../../components/shared/footer';
 
 const CertificatePage: React.FC = () => {
   const [selectedFeature, setSelectedFeature] = React.useState<number | null>(null);
