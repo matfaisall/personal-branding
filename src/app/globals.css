@@ -69,7 +69,14 @@
       opacity: 1;
     }
   }
-}
+;
+
+  --animate-shiny-text: shiny-text 8s infinite;
+  @keyframes shiny-text {
+  0%, 90%, 100% {
+    background-position: calc(-100% - var(--shiny-width)) 0;}
+  30%, 60% {
+    background-position: calc(100% + var(--shiny-width)) 0;}}}
 
 /* CSS Variables untuk colors (optional, bisa di :root atau di sini) */
 :root {
@@ -160,7 +167,6 @@
     @apply bg-amber-700 text-white cursor-pointer;
   }
 
-
 }
 
 /* for about section */
@@ -222,4 +228,3 @@
 .scrollbar-visible::-webkit-scrollbar-thumb:hover {
   background: #ea580c;
 }
-

@@ -1,670 +1,177 @@
 'use client';
 
-import React from 'react';
-import { motion, useReducedMotion, useInView } from 'motion/react';
-import Image from 'next/image';
-import { ExternalLink } from 'lucide-react';
+import React, { useState, useEffect, useMemo, memo } from 'react';
+import { motion, LazyMotion, domAnimation } from 'motion/react';
 
 import StatusIndicator from '@/components/shared/status-indicator';
-import InfiniteScrollCarousel from '@/components/shared/infinite-scroll';
-import { techStackFromLeft, techStackFromRight } from '@/constant/tech-stack';
-
-// import { ContactUsSection } from '@/components/sections/homepage';
-
-import {
-  pageVariants,
-  headerVariants,
-  imageContainerVariants,
-  imageVariants,
-  contentVariants,
-  paragraphVariants,
-  carouselVariants,
-  sectionVariants,
-  educationItemVariants,
-} from './motion.page';
-
-import { BIO_PARAGRAPHS, EDUCATION_DATA } from '@/constant/data/about/educations';
-import { EXPERIENCE_DATA } from '@/constant/data/about/experiences';
-import { CERTIFICATE_DATA } from '@/constant/data/about/certificates';
 import { ContactFooter } from '@/components/shared/footer';
+import { CERTIFICATE_DATA } from '@/constant/data/about/certificates';
 
-// ==================== Sub Components ====================
-const ProfileHeader: React.FC = () => {
-  return (
-    <motion.div
-      className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center"
-      variants={headerVariants}
-      initial="hidden"
-      animate="visible"
-    >
-      <motion.div
-        className="flex flex-col gap-2"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.5, delay: 0.3 }}
+// Import components dan animations dari file terpisah
+import {
+  AboutSection,
+  EducationSection,
+  ExperienceSection,
+  CertificateSection,
+} from './sectionComponents';
+import {
+  headerVariants,
+  headerTitleVariants,
+  headerSubtitleVariants,
+  statusIndicatorVariants,
+} from './animations';
+
+// ==================== Profile Header Component ====================
+const ProfileHeader = memo(() => (
+  <motion.div
+    className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center"
+    variants={headerVariants}
+    initial="hidden"
+    animate="visible"
+  >
+    <div className="flex flex-col gap-2">
+      <motion.h1
+        className="text-3xl font-bold sm:text-4xl lg:text-5xl"
+        variants={headerTitleVariants}
       >
-        <motion.h1
-          className="text-3xl font-bold"
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-        >
-          Muhammad Faisal
-        </motion.h1>
-        <motion.p
-          className="text-base font-medium sm:text-lg"
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6, delay: 0.5 }}
-        >
-          Frontend Developer
-        </motion.p>
-      </motion.div>
-
-      <motion.div
-        initial={{ opacity: 0, scale: 0 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{
-          type: 'spring',
-          stiffness: 260,
-          damping: 20,
-          delay: 0.6,
-        }}
+        Muhammad Faisal
+      </motion.h1>
+      <motion.p
+        className="text-base font-medium text-[#8b8b8b] sm:text-lg"
+        variants={headerSubtitleVariants}
       >
-        <StatusIndicator />
-      </motion.div>
-    </motion.div>
-  );
-};
-
-const ProfileImage: React.FC = () => {
-  const shouldReduceMotion = useReducedMotion();
-
-  return (
-    <motion.div
-      className="col-span-12 md:col-span-5 lg:col-span-4"
-      variants={imageContainerVariants}
-      initial="hidden"
-      animate="visible"
-    >
-      <motion.div
-        className="relative h-64 w-full overflow-hidden rounded-2xl border-2 border-orange-500 sm:h-80 md:h-96 lg:h-[450px]"
-        variants={imageVariants}
-        initial="initial"
-        animate="animate"
-        whileHover={shouldReduceMotion ? undefined : 'hover'}
-        style={{
-          transformStyle: 'preserve-3d',
-          willChange: 'transform',
-        }}
-      >
-        <Image
-          src="/images/me.png"
-          alt="Muhammad Faisal - Frontend Developer"
-          fill
-          className="object-cover"
-          priority
-          quality={90}
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-        />
-      </motion.div>
-    </motion.div>
-  );
-};
-
-const BioContent: React.FC = () => {
-  const contentRef = React.useRef<HTMLDivElement>(null);
-  const isInView = useInView(contentRef, {
-    once: true,
-    margin: '-100px',
-    amount: 0.3,
-  });
-
-  return (
-    <div className="col-span-12 md:col-span-7 lg:col-span-8" ref={contentRef}>
-      <motion.h2
-        className="mb-4 text-2xl font-bold text-white sm:mb-6 sm:text-3xl"
-        custom={0}
-        variants={contentVariants}
-        initial="hidden"
-        animate={isInView ? 'visible' : 'hidden'}
-      >
-        Hi hi hi, Hello...
-      </motion.h2>
-
-      <div className="space-y-3 leading-relaxed text-slate-300 sm:space-y-4">
-        {BIO_PARAGRAPHS.map((paragraph, index) => (
-          <motion.p
-            key={index}
-            className="text-base sm:text-[1.1rem] lg:text-[1.16rem]"
-            custom={index + 1}
-            variants={paragraphVariants}
-            initial="hidden"
-            animate={isInView ? 'visible' : 'hidden'}
-          >
-            {paragraph}
-          </motion.p>
-        ))}
-      </div>
+        Frontend Developer
+      </motion.p>
     </div>
-  );
-};
 
-const TechStackCarousels: React.FC = () => {
-  const carouselRef = React.useRef<HTMLDivElement>(null);
-  const isInView = useInView(carouselRef, {
-    once: true,
-    margin: '-50px',
-    amount: 0.2,
-  });
-
-  return (
-    <motion.div
-      ref={carouselRef}
-      className="space-y-6 sm:space-y-8"
-      initial={{ opacity: 0 }}
-      animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-    >
-      <motion.div
-        custom={0}
-        variants={carouselVariants}
-        initial="hidden"
-        animate={isInView ? 'visible' : 'hidden'}
-      >
-        <InfiniteScrollCarousel items={techStackFromRight} direction="left" duration={25} />
-      </motion.div>
-
-      <motion.div
-        custom={1}
-        variants={carouselVariants}
-        initial="hidden"
-        animate={isInView ? 'visible' : 'hidden'}
-      >
-        <InfiniteScrollCarousel items={techStackFromLeft} direction="right" duration={20} />
-      </motion.div>
+    <motion.div variants={statusIndicatorVariants}>
+      <StatusIndicator />
     </motion.div>
-  );
-};
+  </motion.div>
+));
 
-// ==================== Education Section ====================
-const EducationSection: React.FC = () => {
-  const sectionRef = React.useRef<HTMLDivElement>(null);
-  const isInView = useInView(sectionRef, {
-    once: true,
-    margin: '-100px',
-    amount: 0.3,
-  });
-
-  return (
-    <section
-      ref={sectionRef}
-      className="container-fluid relative w-full px-4 py-16 sm:px-6 sm:py-20 lg:py-24"
+// ==================== Navigation Button Component ====================
+const NavButton = memo(
+  ({
+    tab,
+    activeTab,
+    onClick,
+  }: {
+    tab: string;
+    activeTab: string;
+    onClick: (tab: string) => void;
+  }) => (
+    <button
+      onClick={() => onClick(tab)}
+      className={`cursor-pointer border-b-2 py-4 text-sm font-medium transition-colors ${
+        activeTab === tab
+          ? 'border-orange-500 text-white'
+          : 'border-transparent text-gray-400 hover:text-white'
+      }`}
+      aria-label={`Switch to ${tab} section`}
     >
-      <motion.div
-        variants={sectionVariants}
-        initial="hidden"
-        animate={isInView ? 'visible' : 'hidden'}
-        className="grid grid-cols-12 gap-8 lg:gap-12"
-      >
-        {/* Left Column - Title */}
-        <motion.div
-          className="col-span-12 lg:col-span-6"
-          initial={{ opacity: 0, x: -30 }}
-          animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
-          transition={{
-            type: 'spring',
-            stiffness: 80,
-            damping: 20,
-            delay: 0.2,
-          }}
-        >
-          <div className="sticky top-32">
-            <motion.h2
-              className="mb-2 text-3xl font-bold text-white"
-              whileHover={{ x: 5 }}
-              transition={{ type: 'spring', stiffness: 300 }}
-            >
-              Educations
-            </motion.h2>
-            <motion.p
-              className="text-base text-slate-400 sm:text-lg"
-              initial={{ opacity: 0, y: 10 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
-              transition={{ delay: 0.4 }}
-            >
-              Where my passion for web development began
-            </motion.p>
-          </div>
-        </motion.div>
+      {tab.charAt(0).toUpperCase() + tab.slice(1)}
+    </button>
+  ),
+);
 
-        {/* Right Column - Education Details */}
-        <motion.div
-          className="col-span-12 lg:col-span-6"
-          initial={{ opacity: 0, x: 30 }}
-          animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }}
-          transition={{
-            type: 'spring',
-            stiffness: 80,
-            damping: 20,
-            delay: 0.3,
-          }}
-        >
-          <div className="space-y-2">
-            {/* Institution Name */}
-            <motion.div
-              custom={0}
-              variants={educationItemVariants}
-              initial="hidden"
-              animate={isInView ? 'visible' : 'hidden'}
-            >
-              <motion.h3
-                className="text-2xl font-bold text-white hover:!text-orange-500 sm:text-3xl"
-                whileHover={{ y: 2 }}
-                transition={{ type: 'spring', stiffness: 300 }}
-              >
-                {EDUCATION_DATA.institution}
-              </motion.h3>
-            </motion.div>
+// ==================== Main About Page Component ====================
+const AboutPage = () => {
+  const [activeTab, setActiveTab] = useState('about');
+  const [isScrolled, setIsScrolled] = useState(false);
 
-            {/* Degree & Major */}
-            <motion.div
-              className="space-y-2"
-              custom={1}
-              variants={educationItemVariants}
-              initial="hidden"
-              animate={isInView ? 'visible' : 'hidden'}
-            >
-              <p className="text-lg font-medium text-gray-400 sm:text-xl">
-                {EDUCATION_DATA.degree} - GPA: {EDUCATION_DATA.gpa}
-              </p>
-
-              <p className="text-lg text-gray-400">{EDUCATION_DATA.period}</p>
-            </motion.div>
-
-            {/* GPA */}
-            {/* <motion.div
-              custom={2}
-              variants={educationItemVariants}
-              initial="hidden"
-              animate={isInView ? 'visible' : 'hidden'}
-            >
-              <div className="inline-flex items-center gap-2">
-                <motion.span
-                  className="text-sm font-medium text-slate-400"
-                  whileHover={{ scale: 1.05 }}
-                >
-                  GPA:
-                </motion.span>
-                <motion.span
-                  className="text-md font-bold"
-                  whileHover={{ scale: 1.1 }}
-                  transition={{ type: 'spring', stiffness: 400 }}
-                >
-                  {EDUCATION_DATA.gpa}
-                </motion.span>
-              </div>
-            </motion.div> */}
-          </div>
-        </motion.div>
-      </motion.div>
-    </section>
+  // Data untuk education
+  const educationData = useMemo(
+    () => [
+      {
+        degree: 'Bachelor of Informatics Engineering',
+        institution: 'Muhammadiyah University of Ponorogo',
+        period: '2018 - 2022',
+        description: 'Focused on software engineering, web development, and data structures.',
+      },
+    ],
+    [],
   );
-};
 
-const ExperienceSection: React.FC = () => {
-  const sectionRef = React.useRef<HTMLDivElement>(null);
-  const isInView = useInView(sectionRef, {
-    once: true,
-    margin: '-100px',
-    amount: 0.2,
-  });
+  // Data untuk experience
+  const experienceData = useMemo(
+    () => [
+      {
+        title: 'Frontend Web Developer',
+        company: 'PT Infosys Solusi Terpadu',
+        period: '2023 - 2025',
+        description:
+          'Building scalable web applications using React, Next.js, and TypeScript. Collaborating with cross-functional teams to deliver high-quality user experiences.',
+      },
+    ],
+    [],
+  );
+
+  // Navigation tabs
+  const navigationTabs = useMemo(() => ['about', 'education', 'experience', 'certificates'], []);
+
+  // Render section berdasarkan active tab
+  const renderSection = () => {
+    switch (activeTab) {
+      case 'about':
+        return <AboutSection />;
+      case 'education':
+        return <EducationSection data={educationData} />;
+      case 'experience':
+        return <ExperienceSection data={experienceData} />;
+      case 'certificates':
+        return <CertificateSection data={CERTIFICATE_DATA} />;
+      default:
+        return <AboutSection />;
+    }
+  };
+
+  // Handle scroll untuk sticky navigation
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 100);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
-    <section
-      ref={sectionRef}
-      className="container-fluid relative w-full px-4 py-16 sm:px-6 sm:py-20 lg:py-24"
-    >
-      <motion.div
-        variants={sectionVariants}
-        initial="hidden"
-        animate={isInView ? 'visible' : 'hidden'}
-        className="grid grid-cols-12 gap-8 lg:gap-12"
-      >
-        {/* Left Column - Title */}
-        <motion.div
-          className="col-span-12 lg:col-span-6"
-          initial={{ opacity: 0, x: -30 }}
-          animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
-          transition={{
-            type: 'spring',
-            stiffness: 80,
-            damping: 20,
-            delay: 0.2,
-          }}
-        >
-          <div className="lg:sticky lg:top-32">
-            <motion.h2
-              className="mb-2 text-3xl font-bold text-white"
-              whileHover={{ x: 5 }}
-              transition={{ type: 'spring', stiffness: 300 }}
-            >
-              Experiences
-            </motion.h2>
-            <motion.p
-              className="text-base text-slate-400 sm:text-lg"
-              initial={{ opacity: 0, y: 10 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
-              transition={{ delay: 0.4 }}
-            >
-              Building products that matter
-            </motion.p>
-          </div>
-        </motion.div>
-
-        {/* Right Column - Experience Details */}
-        <motion.div
-          className="col-span-12 lg:col-span-6"
-          initial={{ opacity: 0, x: 30 }}
-          animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }}
-          transition={{
-            type: 'spring',
-            stiffness: 80,
-            damping: 20,
-            delay: 0.3,
-          }}
-        >
-          <div className="space-y-6 rounded-2xl border border-gray-800 bg-gray-900/30 p-6 backdrop-blur-sm sm:space-y-8">
-            {/* Header - Position & Company */}
-            <motion.div
-              className="space-y-2"
-              custom={0}
-              variants={educationItemVariants}
-              initial="hidden"
-              animate={isInView ? 'visible' : 'hidden'}
-            >
-              <motion.h3
-                className="text-2xl font-bold text-white sm:text-3xl"
-                whileHover={{ x: 5, color: '#FFA500' }}
-                transition={{ type: 'spring', stiffness: 300 }}
-              >
-                {EXPERIENCE_DATA.position}
-              </motion.h3>
-              <motion.p
-                className="text-lg font-semibold text-orange-500 sm:text-xl"
-                whileHover={{ x: 5 }}
-                transition={{ type: 'spring', stiffness: 300 }}
-              >
-                at {EXPERIENCE_DATA.company}
-              </motion.p>
-              <div className="flex flex-wrap items-center gap-3 text-sm text-slate-500">
-                <span className="flex items-center gap-1">
-                  <span className="text-slate-400">📅 </span>
-                  {EXPERIENCE_DATA.period}
-                </span>
-              </div>
-            </motion.div>
-
-            {/* Description */}
-            <motion.div
-              custom={1}
-              variants={educationItemVariants}
-              initial="hidden"
-              animate={isInView ? 'visible' : 'hidden'}
-            >
-              <p className="text-base leading-relaxed text-slate-300 sm:text-lg">
-                {EXPERIENCE_DATA.description}
-              </p>
-            </motion.div>
-
-            {/* Responsibilities */}
-            <motion.div
-              className="space-y-3"
-              custom={2}
-              variants={educationItemVariants}
-              initial="hidden"
-              animate={isInView ? 'visible' : 'hidden'}
-            >
-              <h4 className="text-base font-semibold text-slate-300 sm:text-lg">
-                Key Responsibilities
-              </h4>
-              <ul className="space-y-3">
-                {EXPERIENCE_DATA.responsibilities.map((responsibility, index) => (
-                  <motion.li
-                    key={index}
-                    className="flex items-center gap-4"
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 20 }}
-                    transition={{
-                      // delay: 0.5 + index * 0.08,
-                      type: 'spring',
-                      stiffness: 100,
-                    }}
-                    whileHover={{ x: 5 }}
-                  >
-                    <motion.span
-                      className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-orange-500"
-                      whileHover={{ scale: 1.5, rotate: 180 }}
-                      transition={{ type: 'spring', stiffness: 400 }}
-                    />
-                    <span className="text-sm text-slate-300 sm:text-base">{responsibility}</span>
-                  </motion.li>
-                ))}
-              </ul>
-            </motion.div>
-
-            {/* Achievements */}
-            {EXPERIENCE_DATA.achievements && EXPERIENCE_DATA.achievements.length > 0 && (
-              <motion.div
-                className="space-y-3"
-                custom={3}
-                variants={educationItemVariants}
-                initial="hidden"
-                animate={isInView ? 'visible' : 'hidden'}
-              >
-                <h4 className="text-base font-semibold text-slate-300 sm:text-lg">
-                  Key Achievements
-                </h4>
-                <ul className="space-y-2">
-                  {EXPERIENCE_DATA.achievements.map((achievement, index) => (
-                    <motion.li
-                      key={index}
-                      className="flex items-start gap-3"
-                      initial={{ opacity: 0, x: 20 }}
-                      animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 20 }}
-                      transition={{
-                        delay: 0.9 + index * 0.1,
-                        type: 'spring',
-                        stiffness: 100,
-                      }}
-                      whileHover={{ x: 5 }}
-                    >
-                      <motion.span
-                        className="mt-1.5 flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-emerald-500/20"
-                        whileHover={{ scale: 1.2, rotate: 360 }}
-                        transition={{ type: 'spring', stiffness: 400 }}
-                      >
-                        <span className="text-xs">🎯</span>
-                      </motion.span>
-                      <span className="text-sm text-slate-300 sm:text-base">{achievement}</span>
-                    </motion.li>
-                  ))}
-                </ul>
-              </motion.div>
-            )}
-
-            {/* Tech Stack */}
-            {EXPERIENCE_DATA.techStack && EXPERIENCE_DATA.techStack.length > 0 && (
-              <motion.div
-                className="space-y-3"
-                custom={4}
-                variants={educationItemVariants}
-                initial="hidden"
-                animate={isInView ? 'visible' : 'hidden'}
-              >
-                <h4 className="text-base font-semibold text-slate-300 sm:text-lg">Tech Stack</h4>
-                <div className="flex flex-wrap gap-2">
-                  {EXPERIENCE_DATA.techStack.map((tech, index) => (
-                    <motion.span
-                      key={tech}
-                      className="rounded-lg border border-emerald-500/30 bg-emerald-500/10 px-3 py-1.5 text-sm font-medium text-emerald-400"
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
-                      transition={{
-                        delay: 1.2 + index * 0.05,
-                        type: 'spring',
-                        stiffness: 200,
-                      }}
-                      whileHover={{
-                        scale: 1.1,
-                        borderColor: '#10B981',
-                        backgroundColor: 'rgba(16, 185, 129, 0.2)',
-                      }}
-                      whileTap={{ scale: 0.95 }}
-                    >
-                      {tech}
-                    </motion.span>
-                  ))}
-                </div>
-              </motion.div>
-            )}
-          </div>
-        </motion.div>
-      </motion.div>
-    </section>
-  );
-};
-
-const CertificateSection: React.FC = () => {
-  const sectionRef = React.useRef<HTMLDivElement>(null);
-  const isInView = useInView(sectionRef, {
-    once: true,
-    margin: '-100px',
-    amount: 0.2,
-  });
-
-  return (
-    <section
-      ref={sectionRef}
-      className="container-fluid relative w-full px-4 py-16 sm:px-6 sm:py-20 lg:py-24"
-    >
-      <motion.div
-        variants={sectionVariants}
-        initial="hidden"
-        animate={isInView ? 'visible' : 'hidden'}
-        className="grid grid-cols-12 gap-8 lg:gap-12"
-      >
-        {/* column title */}
-        <motion.div
-          className="col-span-12 lg:col-span-6"
-          initial={{ opacity: 0, x: -30 }}
-          animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
-          transition={{
-            type: 'spring',
-            stiffness: 80,
-            damping: 20,
-            delay: 0.2,
-          }}
-        >
-          <div className="sticky top-32">
-            <motion.h2
-              className="mb-2 text-3xl font-bold text-white"
-              whileHover={{ x: 5 }}
-              transition={{ type: 'spring', stiffness: 300 }}
-            >
-              Certificates
-            </motion.h2>
-            <motion.p
-              className="text-base text-slate-400 sm:text-lg"
-              initial={{ opacity: 0, y: 10 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
-              transition={{ delay: 0.4 }}
-            >
-              Continuous learning and skill development
-            </motion.p>
-          </div>
-        </motion.div>
-        {/* column certificate */}
-        <motion.div
-          className="col-span-12 lg:col-span-6"
-          initial={{ opacity: 0, x: 30 }}
-          animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }}
-          transition={{
-            type: 'spring',
-            stiffness: 80,
-            damping: 20,
-            delay: 0.3,
-          }}
-        >
-          <div className="space-y-2">
-            <motion.div initial="hidden" animate="visible">
-              {CERTIFICATE_DATA.map((certificate, index) => (
-                <motion.a
-                  key={index}
-                  href={certificate.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: '-50px' }}
-                  transition={{ duration: 0.4, delay: index * 0.1 }}
-                  whileHover={{ scale: 1.02 }}
-                  className="group mb-2 block rounded-lg border border-gray-800 bg-black/30 p-5 backdrop-blur-sm transition-all duration-300 hover:border-gray-700 hover:bg-black/50"
-                >
-                  <div className="flex items-start justify-between gap-3">
-                    <div className="min-w-0 flex-1">
-                      <h3 className="mb-2 line-clamp-2 text-base font-medium text-gray-100 transition-colors group-hover:text-white">
-                        {certificate.name}
-                      </h3>
-                      <div className="flex items-center gap-2 text-sm">
-                        <span className="font-medium text-orange-500">{certificate.issuer}</span>
-                        <span className="text-gray-600">•</span>
-                        <span className="text-gray-400">{certificate.years.trim()}</span>
-                      </div>
-                    </div>
-                    <ExternalLink className="mt-1 h-4 w-4 flex-shrink-0 text-gray-500 transition-colors group-hover:text-orange-500" />
-                  </div>
-                </motion.a>
-              ))}
-            </motion.div>
-          </div>
-        </motion.div>
-      </motion.div>
-    </section>
-  );
-};
-
-// ==================== Main Component ====================
-const AboutPage: React.FC = () => {
-  return (
-    <div className="overflow-hidden dark:bg-black dark:text-white">
-      <section className="container-fluid relative flex min-h-dvh w-full flex-col justify-center px-4 py-16 sm:px-6 sm:py-20">
-        <motion.div
-          className="flex flex-col gap-12 sm:gap-16"
-          variants={pageVariants}
-          initial="hidden"
-          animate="visible"
-        >
+    <LazyMotion features={domAnimation}>
+      <div className="dark:bg-black dark:text-white">
+        {/* Header Section */}
+        <section className="container-fluid relative flex w-full flex-col justify-center px-4 pt-32 sm:px-6 sm:py-20 md:mt-12">
           <ProfileHeader />
+        </section>
 
-          <div className="grid grid-cols-12 gap-8 lg:gap-10">
-            <ProfileImage />
-            <BioContent />
-          </div>
-
-          <TechStackCarousels />
+        {/* Sticky Navigation */}
+        <motion.div
+          className={`sticky top-19 z-50 mb-10 border-b border-gray-800 transition-all duration-300 md:top-21 md:mb-0 ${
+            isScrolled ? 'bg-black/95 shadow-lg shadow-black/20 backdrop-blur-md' : 'bg-black/50'
+          }`}
+          initial={{ y: 0 }}
+          animate={{ y: 0 }}
+        >
+          <nav className="container-fluid mx-auto px-4 sm:px-6" aria-label="About page navigation">
+            <div className="flex gap-8 overflow-x-auto">
+              {navigationTabs.map((tab) => (
+                <NavButton key={tab} tab={tab} activeTab={activeTab} onClick={setActiveTab} />
+              ))}
+            </div>
+          </nav>
         </motion.div>
-      </section>
 
-      <EducationSection />
+        {/* Main Content */}
+        <main className="container-fluid relative w-full px-4 sm:px-6 sm:py-10">
+          {renderSection()}
+        </main>
 
-      <ExperienceSection />
-
-      <CertificateSection />
-
-      <section className="container-fluid relative mt-32 flex w-full flex-col justify-center px-4 sm:px-6 sm:py-20 md:mt-12">
-        <ContactFooter />
-      </section>
-    </div>
+        {/* Footer */}
+        <section className="container-fluid relative flex w-full flex-col justify-center px-4 sm:px-6 sm:py-20">
+          <ContactFooter />
+        </section>
+      </div>
+    </LazyMotion>
   );
 };
 
