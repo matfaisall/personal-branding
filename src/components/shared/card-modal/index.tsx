@@ -33,7 +33,6 @@ const CardModal = React.memo<CardModalProps>(({ feature, onClose }) => {
         aria-hidden="true"
       />
 
-      {/* Modal Container - FULLY RESPONSIVE */}
       <div
         className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto p-0 sm:items-center sm:p-4"
         onClick={onClose}
@@ -60,7 +59,6 @@ const CardModal = React.memo<CardModalProps>(({ feature, onClose }) => {
             ease: SMOOTH_EASE,
           }}
         >
-          {/* Close Button - Responsive positioning */}
           <button
             onClick={onClose}
             className="sticky top-4 right-4 z-10 ml-auto flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-[#1a1a1a] shadow-lg backdrop-blur-sm transition-all duration-200 hover:rotate-90 hover:border-white/20 hover:bg-white/10 sm:absolute sm:top-6 sm:right-6"
@@ -76,7 +74,6 @@ const CardModal = React.memo<CardModalProps>(({ feature, onClose }) => {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.1, duration: 0.3 }}
           >
-            {/* Wrapper dengan aspect ratio yang responsive */}
             <div className="relative w-full" style={{ aspectRatio: '3 / 2' }}>
               <img
                 src={feature.imageSrc}
@@ -91,7 +88,6 @@ const CardModal = React.memo<CardModalProps>(({ feature, onClose }) => {
             </div>
           </motion.div>
 
-          {/* Title - Responsive text sizing */}
           <motion.div
             className="mb-4 sm:mb-6 md:mb-8"
             initial={{ opacity: 0 }}
@@ -100,7 +96,7 @@ const CardModal = React.memo<CardModalProps>(({ feature, onClose }) => {
           >
             <h2
               id={`modal-title-${feature.id}`}
-              className="text-2xl leading-tight font-semibold tracking-tight sm:text-3xl md:text-4xl lg:text-5xl"
+              className="text-2xl leading-tight font-semibold tracking-tight sm:text-3xl md:text-4xl lg:text-2xl"
             >
               {feature.title}
             </h2>

@@ -17,7 +17,7 @@ const CardComp = React.memo<CardProps>(
   ({ feature, onClick, showExpandButton = true, index = 0 }) => {
     return (
       <motion.div
-        className="group relative mx-auto flex h-full w-full cursor-pointer flex-col rounded-3xl border border-white/[0.03] bg-[#1a1a1a]/50 p-4 backdrop-blur-sm will-change-transform hover:bg-[#1f1f1f]/60 md:p-6"
+        className="group relative mx-auto flex h-full w-full cursor-pointer flex-col rounded-xl border border-white/[0.01] bg-[#1a1a1a]/50 p-4 backdrop-blur-sm will-change-transform hover:bg-[#1f1f1f]/60 md:p-6"
         onClick={onClick}
         role="button"
         aria-label={`Open ${feature.title} details`}
@@ -73,6 +73,7 @@ const CardComp = React.memo<CardProps>(
             loading={index < 3 ? 'eager' : 'lazy'}
             decoding="async"
           />
+          <div className="pointer-events-none absolute inset-0 rounded-2xl bg-black opacity-30"></div>
         </div>
 
         {/* Title */}
