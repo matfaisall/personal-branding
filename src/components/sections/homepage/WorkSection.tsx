@@ -6,6 +6,7 @@ import { motion } from 'motion/react';
 import Image from 'next/image';
 import { LIST_WORKS } from '@/constant/work';
 import CardComp from '@/components/shared/card';
+import ViewMoreCard from '@/components/shared/view-more-card';
 
 const WorkSection = () => {
   const scrollContainerRef = React.useRef<HTMLDivElement>(null);
@@ -89,8 +90,22 @@ const WorkSection = () => {
                     />
                   </motion.div>
                 ))}
-                {/* tambahkan card untuk ngasih tahu kalo mau liat portfolio atu works lebih lengkap bisa click di card sini */}
-                {/* fitur mneyusul */}
+                {/* card for view more */}
+                <motion.div
+                  initial={{ opacity: 0, x: 50 }}
+                  animate={{
+                    opacity: 1,
+                    x: 0,
+                  }}
+                  transition={{
+                    duration: 0.5,
+                    delay: LIST_WORKS.length * 0.1,
+                  }}
+                  className="w-74 flex-shrink-0 md:w-78"
+                  style={{ scrollSnapAlign: 'start' }}
+                >
+                  <ViewMoreCard index={LIST_WORKS.length} />
+                </motion.div>
               </div>
             </div>
           </div>
