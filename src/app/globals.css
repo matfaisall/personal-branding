@@ -209,11 +209,16 @@
 
 .scrollbar-visible {
   scrollbar-width: thin;
-  scrollbar-color: #f97316 #27272a;
+  scrollbar-color: hsl(0, 0%, 22%) #27272a;
 }
 
 .scrollbar-visible::-webkit-scrollbar {
-  height: 6px;
+  height: 4px;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
 }
 
 .scrollbar-visible::-webkit-scrollbar-track {

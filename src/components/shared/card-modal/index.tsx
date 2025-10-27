@@ -3,6 +3,7 @@ import React from 'react';
 import { motion, type Easing } from 'motion/react';
 import { X } from 'lucide-react';
 import { CardListInterface } from '@/types/certificate';
+import Image from 'next/image';
 
 interface CardModalProps {
   feature: CardListInterface;
@@ -75,16 +76,25 @@ const CardModal = React.memo<CardModalProps>(({ feature, onClose }) => {
             transition={{ delay: 0.1, duration: 0.3 }}
           >
             <div className="relative w-full" style={{ aspectRatio: '3 / 2' }}>
-              <img
-                src={feature.imageSrc}
-                alt={feature.imageAlt}
-                className="h-full w-full object-contain p-2 sm:p-0"
-                loading="eager"
-                decoding="async"
-                style={{
-                  imageRendering: 'crisp-edges',
-                }}
-              />
+              {feature.imageSrc !== '' ? (
+                <Image
+                  src={feature.imageSrc}
+                  alt={feature.imageAlt}
+                  fill
+                  className="h-full w-full object-contain p-2 sm:p-0"
+                />
+              ) : (
+                <div className="flex h-full w-full flex-col items-center justify-center">
+                  <Image
+                    src="/images/image-not-found.png"
+                    alt="Image not found"
+                    width={60}
+                    height={60}
+                    className="opacity-50"
+                  />
+                  <p className="font-base mt-2 text-orange-100">Image not found</p>
+                </div>
+              )}
             </div>
           </motion.div>
 

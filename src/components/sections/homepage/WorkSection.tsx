@@ -67,7 +67,7 @@ const WorkSection = () => {
               }}
             >
               <div className="flex gap-6 pb-4" style={{ width: 'max-content' }}>
-                {LIST_WORKS.map((list, index) => (
+                {LIST_WORKS.slice(0, 3).map((list, index) => (
                   <motion.div
                     key={list.id}
                     initial={{ opacity: 0, x: 50 }}

@@ -3,8 +3,9 @@ import React from 'react';
 import { CardListInterface } from '@/types/certificate';
 import { motion, type Easing } from 'motion/react';
 import { Plus } from 'lucide-react';
+import Image from 'next/image';
 
-const SMOOTH_EASE: Easing = [0.25, 0.1, 0.25, 1]; // ease-out-cubic
+const SMOOTH_EASE: Easing = [0.25, 0.1, 0.25, 1];
 
 interface CardProps {
   feature: CardListInterface;
@@ -66,14 +67,28 @@ const CardComp = React.memo<CardProps>(
           className="relative w-full flex-shrink-0 overflow-hidden rounded-xl bg-[#0d0d0d]"
           style={{ aspectRatio: '3 / 2' }}
         >
-          <img
-            src={feature.imageSrc}
-            alt={feature.imageAlt}
-            className="h-full w-full rounded-xl object-cover object-center transition-transform duration-300 group-hover:scale-105"
-            loading={index < 3 ? 'eager' : 'lazy'}
-            decoding="async"
-          />
-          <div className="pointer-events-none absolute inset-0 rounded-2xl bg-black opacity-30"></div>
+          {feature.imageSrc !== '' ? (
+            <Image
+              src={feature.imageSrc}
+              alt={feature.imageAlt}
+              fill
+              sizes="(max-width: 768px) 288px, 320px"
+              className="rounded-xl object-cover object-center transition-transform duration-300 group-hover:scale-105"
+              priority={index < 3}
+            />
+          ) : (
+            <div className="flex h-full w-full flex-col items-center justify-center">
+              <Image
+                src="/images/image-not-found.png"
+                alt="Image not found"
+                width={60}
+                height={60}
+                className="opacity-50"
+              />
+              <p className="font-base mt-2 text-orange-100">Image not found</p>
+            </div>
+          )}
+          <div className="pointer-events-none absolute inset-0 rounded-xl bg-black opacity-30"></div>
         </div>
 
         {/* Title */}

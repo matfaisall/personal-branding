@@ -22,4 +22,11 @@ export const LIST_WORKS: WorkListInterface[] = [
     imageSrc: '/works/maintenance-management-system.png',
     imageAlt: 'maintenance management system project',
   },
+  {
+    id: 4,
+    title: 'Realtime Chat Apps',
+    shortDescription: '',
+    imageSrc: '',
+    imageAlt: 'Realtime Chat App Image',
+  },
 ];
