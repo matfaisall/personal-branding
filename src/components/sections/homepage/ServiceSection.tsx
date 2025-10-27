@@ -6,6 +6,7 @@ import TitleSection from '@/elements/title-section';
 import React from 'react';
 import { services } from '@/constant/section/services';
 import { ArrowRight } from 'lucide-react';
+import Image from 'next/image';
 
 const ServiceSection = () => {
   const scrollContainerRef = React.useRef<HTMLDivElement>(null);
@@ -45,12 +46,12 @@ const ServiceSection = () => {
 
   return (
     <div className="container-fluid h-full w-full p-8">
-      <TitleSection title="services" withUnderline />
+      <TitleSection title="Services" desc="Creating digital experiences that feel human" />
 
       {/* content */}
       <div className="grid grid-cols-12 gap-4 p-0 lg:p-8">
         {/* left side */}
-        <div className="col-span-12 md:col-span-4">
+        <div className="col-span-12 hidden md:col-span-4 lg:block">
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -59,9 +60,13 @@ const ServiceSection = () => {
             className="flex justify-center"
           >
             <div className="relative">
-              <span className="text-outline text-[12rem] leading-none select-none lg:text-[14rem] xl:text-[16rem]">
-                S
-              </span>
+              <Image
+                src="/images/crafted-perfection.png"
+                alt="Service Image"
+                height={400}
+                width={400}
+                className="w-full object-cover"
+              />
             </div>
           </motion.div>
         </div>
@@ -114,21 +119,12 @@ const ServiceSection = () => {
           {/* Horizontal Scroll Container */}
           <div
             ref={scrollContainerRef}
-            className="scrollbar-hide flex gap-8 overflow-x-auto overflow-y-hidden pb-4 lg:gap-12 lg:pb-0"
+            className="scrollbar-hide flex h-full items-center gap-8 overflow-x-auto overflow-y-hidden pb-4 lg:gap-12 lg:pb-0"
             style={{
               scrollbarWidth: 'none',
               msOverflowStyle: 'none',
               overflowY: 'hidden',
             }}
-            // onWheel={(e) => {
-            //   // Prevent vertical scrolling on wheel event
-            //   if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
-            //     e.preventDefault();
-            //     if (scrollContainerRef.current) {
-            //       scrollContainerRef.current.scrollLeft += e.deltaY;
-            //     }
-            //   }
-            // }}
           >
             {services.map((service, index) => (
               <motion.div

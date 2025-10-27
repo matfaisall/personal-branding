@@ -78,7 +78,7 @@ const MenuOverlay: React.FC<MenuOverlayProps> = ({ isOpen, onClose }) => {
             >
               <ul className="list-none space-y-4 md:space-y-6">
                 {navigationMenu.map((menu) => {
-                  console.log('menu', menu.href);
+                  // console.log('menu', menu.href);
                   return (
                     <motion.li
                       key={menu.id}

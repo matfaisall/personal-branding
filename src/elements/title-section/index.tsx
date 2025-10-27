@@ -1,25 +1,49 @@
 'use client';
 
+import { AnimatedShinyText } from '@/components/ui/animated-shiny-text';
 import React from 'react';
-import { motion } from 'motion/react';
+import { motion, type Variants } from 'motion/react';
 
 type TitleSectionProps = {
   title: string;
-  withUnderline?: boolean;
+  desc?: string;
 };
 
-const TitleSection = ({ title, withUnderline }: TitleSectionProps) => {
+const motionTitleSection: Variants = {
+  hidden: { opacity: 0, x: -20 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.4, ease: 'easeOut' },
+  },
+};
+
+const motionDescSection: Variants = {
+  hidden: { opacity: 0, x: -20 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.6, ease: 'easeOut' },
+  },
+};
+
+const TitleSection = ({ title, desc = 'Know more about me' }: TitleSectionProps) => {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, delay: 1 }}
-      viewport={{ once: true }}
-      className="mb-16"
-    >
-      <h1 className="text-4xl font-bold tracking-[0.2em] text-gray-300 uppercase">{title}</h1>
-      {withUnderline && <div className="mt-2 h-[2px] w-12 rounded bg-orange-500"></div>}
-    </motion.div>
+    <>
+      <div className="mb-8 flex flex-col gap-2">
+        <motion.div variants={motionTitleSection} initial="hidden" animate="visible">
+          <AnimatedShinyText className="mx-0 text-3xl font-bold sm:text-4xl lg:text-5xl">
+            {title}
+          </AnimatedShinyText>
+        </motion.div>
+
+        <motion.div variants={motionDescSection} initial="hidden" animate="visible">
+          <AnimatedShinyText className="mx-0 text-sm font-medium sm:text-lg">
+            {desc}
+          </AnimatedShinyText>
+        </motion.div>
+      </div>
+    </>
   );
 };
 
