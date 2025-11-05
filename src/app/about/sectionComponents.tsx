@@ -151,7 +151,7 @@ export const ExperienceSection = memo(({ data }: { data: Experience[] }) => (
             key={index}
             title={exp.title}
             subtitle={exp.company}
-            period={exp.period}
+            period={exp?.period}
             description={exp.description}
             index={index}
           />

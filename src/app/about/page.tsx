@@ -103,6 +103,12 @@ const AboutPage = () => {
         description:
           'Building scalable web applications using React, Next.js, and TypeScript. Collaborating with cross-functional teams to deliver high-quality user experiences.',
       },
+      {
+        title: 'Freelance Frontend Developer',
+        company: 'PT Ragdalion Indonesia',
+        period: '',
+        description: 'Building web app using Next.js, and TypeScript',
+      },
     ],
     [],
   );
