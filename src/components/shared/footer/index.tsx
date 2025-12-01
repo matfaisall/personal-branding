@@ -70,7 +70,7 @@ export const ContactFooter = () => {
                 {/* download cta */}
                 <ConfirmDownloadDialogs
                   triggerLabel="Download CV"
-                  filePath="/cv/muhammad-faisal'scv.pdf"
+                  filePath="/cv/mat-faisal's-cv.pdf"
                   fileName="muhammad-faisal'scv.pdf"
                 />
               </motion.div>

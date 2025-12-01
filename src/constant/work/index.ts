@@ -26,7 +26,14 @@ export const LIST_WORKS: WorkListInterface[] = [
     id: 4,
     title: 'Realtime Chat Apps',
     shortDescription: '',
-    imageSrc: '',
+    imageSrc: '/works/chat-app.png',
     imageAlt: 'Realtime Chat App Image',
+  },
+  {
+    id: 5,
+    title: 'Go Pokemon Go',
+    shortDescription: '',
+    imageSrc: '/works/go-pokemon-go.png',
+    imageAlt: 'Go Pokemon Go Image',
   },
 ];
